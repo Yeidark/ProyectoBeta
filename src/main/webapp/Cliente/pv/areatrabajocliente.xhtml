@@ -2,75 +2,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition>
     <table>
+        <br></br>
+        <br></br>   
                 <tr> 
                     <th>Fecha</th>
                     <th>Codigo</th> 
                     <th>Producto</th> 
                     <th>Cantidad</th> 
-                    <th>Domicilio</th>
                     <th>Direccion</th>
                     <th>Estado</th>
                     <th>Factura</th>
                 </tr>
+        <c:forEach var="com" items="#{ventasSession.leerTodo()}">
                 <tr>
-                    <td>02-05-2021</td>
-                    <td>02324455</td>
-                    <td>Mug personalizado</td>
-                    <td>01</td>
-                    <td>Si</td>
-                    <td>Cra 5 a este#89c</td>
-                    <td>Entregado</td>
-                    <td><button class="btn"><i class="fa fa-download"></i> Download</button>
+                    <td>#{com.fechaVenta}</td>
+                    <td>#{com.numeroDeCompra}</td>
+                    <td>#{com.idProducto.idTipoProducto.nombreProducto}</td>
+                    <td>#{com.cantidadProducto}</td>
+                    <td>#{com.idCliente.personas.tipoDeVia}#{com.idCliente.personas.numeroVia}#{com.idCliente.personas.numero}#{com.idCliente.personas.letra}#{com.idCliente.personas.numeroApto}</td>
+                    <td>#{com.idEstadoDeEnvios.estadoDeEnvio}</td>
+                    <td><button class="btn"><i class="fa fa-download"></i>Descargar</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>02-05-2021</td>
-                    <td>02324455</td>
-                    <td>Mug personalizado</td>
-                    <td>01</td>
-                    <td>Si</td>
-                    <td>Cra 5 a este#89c</td>
-                    <td>Entregado</td>
-                    <td><button class="btn"><i class="fa fa-download"></i> Download</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>02-05-2021</td>
-                    <td>02324455</td>
-                    <td>Mug personalizado</td>
-                    <td>01</td>
-                    <td>Si</td>
-                    <td>Cra 5 a este#89c</td>
-                    <td>Entregado</td>
-                    <td><button class="btn"><i class="fa fa-download"></i> Download</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>02-05-2021</td>
-                    <td>02324455</td>
-                    <td>Mug personalizado</td>
-                    <td>01</td>
-                    <td>Si</td>
-                    <td>Cra 5 a este#89c</td>
-                    <td>Entregado</td>
-                    <td><button class="btn"><i class="fa fa-download"></i> Download</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>02-05-2021</td>
-                    <td>02324455</td>
-                    <td>Mug personalizado</td>
-                    <td>01</td>
-                    <td>Si</td>
-                    <td>Cra 5 a este#89c</td>
-                    <td>Entregado</td>
-                    <td><button class="btn"><i class="fa fa-download"></i> Download</button>
-                    </td>
-                </tr>
+            </c:forEach>
+               
             </table>
+        <br></br>
+        <br></br>
         </ui:composition>
 </html>
 

@@ -55,7 +55,7 @@ private Inventario stockAgr = new Inventario();
     
     public String cargarStock(Inventario invIn){
         stockTem = invIn;
-        return "areatrabajo-inventario_stock-editar";
+        return "inventario_stock-editar";
     }
     
     public void editarStock(){

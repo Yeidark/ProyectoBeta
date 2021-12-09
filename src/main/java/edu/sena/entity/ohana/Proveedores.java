@@ -46,6 +46,9 @@ public class Proveedores implements Serializable {
     @Size(max = 20)
     @Column(name = "nombreProveedor")
     private String nombreProveedor;
+    @Size(max = 20)
+    @Column(name = "apellidoProveedor")
+    private String apellidoProveedor;
     @OneToMany(mappedBy = "nit", fetch = FetchType.LAZY)
     private Collection<Inventario> inventarioCollection;
 
@@ -94,6 +97,14 @@ public class Proveedores implements Serializable {
 
     public void setNombreProveedor(String nombreProveedor) {
         this.nombreProveedor = nombreProveedor;
+    }
+
+    public String getApellidoProveedor() {
+        return apellidoProveedor;
+    }
+
+    public void setApellidoProveedor(String apellidoProveedor) {
+        this.apellidoProveedor = apellidoProveedor;
     }
 
     public Collection<Inventario> getInventarioCollection() {
