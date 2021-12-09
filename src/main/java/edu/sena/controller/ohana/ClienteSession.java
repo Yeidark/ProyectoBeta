@@ -12,8 +12,6 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
-import javax.faces.view.facelets.FaceletContext;
 import org.primefaces.PrimeFaces;
 
 /**
