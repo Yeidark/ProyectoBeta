@@ -101,8 +101,6 @@ public class Personas implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Localidades numeroLocalidad;
     @OneToMany(mappedBy = "personas", fetch = FetchType.LAZY)
-    private Collection<Proveedores> proveedoresCollection;
-    @OneToMany(mappedBy = "personas", fetch = FetchType.LAZY)
     private Collection<Clientes> clientesCollection;
 
     public Personas() {
@@ -261,14 +259,6 @@ public class Personas implements Serializable {
 
     public void setNumeroLocalidad(Localidades numeroLocalidad) {
         this.numeroLocalidad = numeroLocalidad;
-    }
-
-    public Collection<Proveedores> getProveedoresCollection() {
-        return proveedoresCollection;
-    }
-
-    public void setProveedoresCollection(Collection<Proveedores> proveedoresCollection) {
-        this.proveedoresCollection = proveedoresCollection;
     }
 
     public Collection<Clientes> getClientesCollection() {
