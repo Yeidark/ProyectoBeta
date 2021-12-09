@@ -3,21 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition>  
         <main>
                 <section class="form-registro" style="width: 60%; margin-left: 40%; margin-right: 5%">
-                    <h:form style="align-content: right">
+                    <h:form >
                         <h4 align="center">Stock</h4>
-                        <h:inputText class="controls"  id="idInventario" html5:placeholder="Id Inventario" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText class="controls"  id="idProducto" html5:placeholder="Id Producto" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText class="controls"  id="Proveedor" html5:placeholder="Proveedor" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText class="controls"  id="precioUnitario" html5:placeholder="Precio Unitario" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText class="controls"  id="precioVenta" html5:placeholder="Precio Venta" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText class="controls"  id="cantidadEntrante" html5:placeholder="Cantidad en stock" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText class="controls"  id="fechaIngreso" html5:placeholder="Fecha de ingreso" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText class="controls"  id="lote" html5:placeholder="Lote" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:commandButton class="botons" type="submit" value="Agregar"/>
+                        <h:inputText class="controls" value="#{inventarioSession.stockAgr.idInventario}"  id="idInventario" html5:placeholder="Id Inventario" required="" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText class="controls" value="#{inventarioSession.stockAgr.idProducto}"   id="idProducto" html5:placeholder="Id Producto" required="" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText class="controls" value="#{inventarioSession.stockAgr.nit.nombreProveedor}"   id="Proveedor" html5:placeholder="Proveedor" required="" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText class="controls" value="#{inventarioSession.stockAgr.precioUnitario}"   id="precioUnitario" html5:placeholder="Precio Unitario" required="" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText class="controls" value="#{inventarioSession.stockAgr.precioVenta}"   id="precioVenta" html5:placeholder="Precio Venta" required="" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText class="controls" value="#{inventarioSession.stockAgr.cantidadEntrante}"   id="cantidadEntrante" html5:placeholder="Cantidad en stock" required="" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText class="controls" value="#{inventarioSession.stockAgr.fechaIngreso}"   id="fechaIngreso" html5:placeholder="Fecha de ingreso" required="" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText class="controls" value="#{inventarioSession.stockAgr.lote}"   id="lote" html5:placeholder="Lote" required="" style="margin-right: 25px; width: 40%"/>
+                        <h:commandButton action="#{inventarioSession.agregarStock()}" class="botons" type="submit" value="Agregar"/>
 
                     </h:form>
                 </section>

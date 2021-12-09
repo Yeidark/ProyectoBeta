@@ -6,22 +6,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>  
         
-        <fieldset>
-                <legend>Inventario</legend>
-                            <p><div class="boton">
-                    <input type="submit" value="Modificar" class="btn btn-secondary"/>
-                    <input type="reset" value="Eliminar" class="btn btn-secondary"/>
-                    <a href="#{request.contextPath}/administrador/inventario_agregarproductos.xhtml">
-                        <input type="reset" value="Agregar" class="btn btn-secondary"/>
-                    </a>
-                </div></p>
+
 
         <main>
-            <fieldset style="width: 80%; margin-left: 35%">
-                <legend>Productos</legend>
+            <fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%">
+                
+                
+               
 
                 <div class="table" style=" overflow: scroll;height: 300px">
-                    <table >
+                    <table border="1">
                         <tr>
                             <th width="20%">id Producto</th>
 
@@ -32,10 +26,14 @@
                             <th width="20%">Tamaño</th>
 
                             <th width="20%">Color</th>
-
+                            
+                            <th width="20%">Modificar</th>
+                            
+                            <th width="20%">Eliminar</th>
+                           
                         </tr>
                         <h:form>
-                        <c:forEach var="prod" items="#{productoView.leerTodo()}">
+                            <c:forEach var="prod" items="#{productoSession.leerTodo()}">
                             <tr>
                                 <td>#{prod.idProducto}</td>
 
@@ -47,15 +45,26 @@
 
                                 <td>#{prod.color}</td>
                                 
-                                <td><h:commandButton class="btn btn-danger" value="Estado"></h:commandButton></td>
+                                <td><h:commandButton action="#{productoSession.cargaProducto(prod)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
+                                
+                                <td><h:commandButton action="#{productoSession.removerproducto(prod)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
                             </tr>
                         </c:forEach>
-                        </h:form>    
+                            
+                        </h:form>   
+                        
                     </table>
+                    
+                   
                 </div>
+                 <a href="#{request.contextPath}/administrador/inventario_agregarproductos.xhtml" style="margin-left: 87%;">
+                        <input type="reset" value="Agregar" class="btn btn-secondary"/>
+                    </a>
             </fieldset>
+            
         </main>
-                </fieldset>
+        
+        
     </ui:composition>
 </html>
 

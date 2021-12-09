@@ -12,9 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,14 +41,11 @@ public class Proveedores implements Serializable {
     @Size(max = 10)
     @Column(name = "producto")
     private String producto;
+    @Column(name = "numeroCedula")
+    private Integer numeroCedula;
     @Size(max = 20)
     @Column(name = "nombreProveedor")
     private String nombreProveedor;
-    @JoinColumns({
-        @JoinColumn(name = "numeroCedula", referencedColumnName = "numeroCedula"),
-        @JoinColumn(name = "numeroCedula", referencedColumnName = "numeroCedula")})
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Personas personas;
     @OneToMany(mappedBy = "nit", fetch = FetchType.LAZY)
     private Collection<Inventario> inventarioCollection;
 
@@ -86,20 +80,20 @@ public class Proveedores implements Serializable {
         this.producto = producto;
     }
 
+    public Integer getNumeroCedula() {
+        return numeroCedula;
+    }
+
+    public void setNumeroCedula(Integer numeroCedula) {
+        this.numeroCedula = numeroCedula;
+    }
+
     public String getNombreProveedor() {
         return nombreProveedor;
     }
 
     public void setNombreProveedor(String nombreProveedor) {
         this.nombreProveedor = nombreProveedor;
-    }
-
-    public Personas getPersonas() {
-        return personas;
-    }
-
-    public void setPersonas(Personas personas) {
-        this.personas = personas;
     }
 
     public Collection<Inventario> getInventarioCollection() {

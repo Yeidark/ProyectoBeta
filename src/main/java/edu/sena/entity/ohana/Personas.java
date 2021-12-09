@@ -37,12 +37,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Personas.findAll", query = "SELECT p FROM Personas p")})
 public class Personas implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "contrasenia")
-    private String contrasenia;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -78,7 +72,7 @@ public class Personas implements Serializable {
     @Size(max = 1)
     @Column(name = "letraVia")
     private String letraVia;
-    @Size(max = 6)
+    @Size(max = 10)
     @Column(name = "numero")
     private String numero;
     @Size(max = 1)
@@ -90,6 +84,11 @@ public class Personas implements Serializable {
     @Column(name = "fechaDeNacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaDeNacimiento;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "contrasenia")
+    private String contrasenia;
     @JoinTable(name = "roles_personas", joinColumns = {
         @JoinColumn(name = "numeroCedula", referencedColumnName = "numeroCedula"),
         @JoinColumn(name = "numeroCedula", referencedColumnName = "numeroCedula")}, inverseJoinColumns = {
@@ -113,10 +112,11 @@ public class Personas implements Serializable {
         this.numeroCedula = numeroCedula;
     }
 
-    public Personas(Integer numeroCedula, String primerNombre, String primerApellido) {
+    public Personas(Integer numeroCedula, String primerNombre, String primerApellido, String contrasenia) {
         this.numeroCedula = numeroCedula;
         this.primerNombre = primerNombre;
         this.primerApellido = primerApellido;
+        this.contrasenia = contrasenia;
     }
 
     public Integer getNumeroCedula() {
@@ -231,6 +231,14 @@ public class Personas implements Serializable {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
     public Collection<Roles> getRolesCollection() {
         return rolesCollection;
     }
@@ -294,14 +302,6 @@ public class Personas implements Serializable {
     @Override
     public String toString() {
         return "edu.sena.entity.ohana.Personas[ numeroCedula=" + numeroCedula + " ]";
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContraseña(String contrasenia) {
-        this.contrasenia = contrasenia;
     }
     
 }

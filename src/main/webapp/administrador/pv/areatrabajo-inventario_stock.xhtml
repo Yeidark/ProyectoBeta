@@ -2,68 +2,75 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition>  
-        <fieldset>
-            <legend>Inventario</legend>
-            <p><div class="boton">
-                    <input type="submit" value="Modificar" class="btn btn-secondary"/>
-                    <input type="reset" value="Eliminar" class="btn btn-secondary"/>
-                    <a href="#{request.contextPath}/administrador/inventario_stock-agregar.xhtml">
-                        <input type="reset" value="Agregar" class="btn btn-secondary"/>
-                    </a>
-                </div></p>
 
-            <main>
-                <fieldset style="width: 100%; margin-left: 35%">
-                    <legend>Productos</legend>
 
-                    <div class="table" style=" overflow: scroll;height: 300px">
-                        <table >
+
+        
+        <main>
+            <fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%">
+
+            
+
+                <div class="table" style=" overflow: scroll;height: 300px">
+                    <table border="1">
+                        <tr>
+                            <th width="100px">Id inventario</th>
+
+                            <th width="100px">Id Producto</th>  
+
+                            <th width="300px">Proveedor</th>
+
+                            <th width="100px">Precio unitario</th>
+
+                            <th width="100px">Precio venta</th>
+
+                            <th width="200px">Cantidad en stock</th>
+
+                            <th width="1000px">Fecha de ingreso</th>
+
+                            <th width="100px">Lote</th>
+
+                            <th width="100px">Modificar</th>
+
+                            <th width="100px">Eliminar</th>
+
+                        </tr>
+                        <h:form>
+                        <c:forEach var="prosa" items="#{inventarioSession.leerTodo()}">
                             <tr>
-                                <th width="100px">Id inventario</th>
+                                <td>#{prosa.idInventario}</td>
 
-                                <th width="400px">Id Producto</th>  
+                                <td>#{prosa.idProducto.idProducto}</td>
 
-                                <th width="300px">Proveedor</th>
+                                <td>#{prosa.nit.nombreEmpresa}</td>
 
-                                <th width="100px">Precio unitario</th>
+                                <td>#{prosa.precioUnitario}</td>
 
-                                <th width="300px">Precio venta</th>
+                                <td>#{prosa.precioVenta}</td>
 
-                                <th width="300px">Cantidad en stock</th>
+                                <td>#{prosa.cantidadStock}</td>
 
-                                <th width="100px">Fecha de ingreso</th>
+                                <td>#{prosa.fechaIngreso}</td>
 
-                                <th width="100px">Lote</th>
-
+                                <td>#{prosa.lote}</td>
+                                
+                                <td><h:commandButton action="#{inventarioSession.cargarStock(prosa)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
+                                
+                                <td><h:commandButton action="#{inventarioSession.removerStock(prosa)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
                             </tr>
-                            <c:forEach var="prosa" items="#{inventarioSession.leerTodo()}">
-                                <tr>
-                                    <td>#{prosa.idInventario}</td>
-
-                                    <td>#{prosa.idProducto.idProducto}</td>
-
-                                    <td>#{prosa.nit.nombreEmpresa}</td>
-
-                                    <td>#{prosa.precioUnitario}</td>
-
-                                    <td>#{prosa.precioVenta}</td>
-
-                                    <td>#{prosa.cantidadStock}</td>
-
-                                    <td>#{prosa.fechaIngreso}</td>
-
-                                    <td>#{prosa.lote}</td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </div>
-                </fieldset>
-            </main>
-        </fieldset>
+                        </c:forEach>
+                        </h:form>
+                    </table>
+                </div>
+                    <a href="#{request.contextPath}/administrador/inventario_stock-agregar.xhtml">
+                    <input type="reset" value="Agregar" class="btn btn-secondary" style="margin-left: 87%;"/>
+                </a>
+            </fieldset>
+        </main>
+            
     </ui:composition>
 </html>
 

@@ -68,6 +68,8 @@ public class Ventas implements Serializable {
     @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
     @ManyToOne(fetch = FetchType.LAZY)
     private Productos idProducto;
+    @OneToMany(mappedBy = "idVentas", fetch = FetchType.LAZY)
+    private Collection<Inventario> inventarioCollection;
 
     public Ventas() {
     }
@@ -170,6 +172,14 @@ public class Ventas implements Serializable {
 
     public void setIdProducto(Productos idProducto) {
         this.idProducto = idProducto;
+    }
+
+    public Collection<Inventario> getInventarioCollection() {
+        return inventarioCollection;
+    }
+
+    public void setInventarioCollection(Collection<Inventario> inventarioCollection) {
+        this.inventarioCollection = inventarioCollection;
     }
 
     @Override

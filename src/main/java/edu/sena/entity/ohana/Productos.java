@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.sena.entity.ohana;
 
 import java.io.Serializable;
@@ -143,5 +142,5 @@ public class Productos implements Serializable {
     public String toString() {
         return "edu.sena.entity.ohana.Productos[ idProducto=" + idProducto + " ]";
     }
-
+    
 }

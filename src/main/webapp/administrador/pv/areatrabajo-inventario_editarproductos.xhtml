@@ -10,12 +10,12 @@
             <section class="form-registro" style="width: 60%; margin-left: 40%; margin-right: 10%; margin-bottom: 3%">
                 <h:form>
                     <h:messages style="color: red"></h:messages>
-                    <h4 align="center">Agregar producto</h4>
-                    <h:inputText required="true" requiredMessage="Ingresar el id del producto" value="#{productoSession.prodagr.idProducto}" class="controls" style="width: 40%; margin-right: 8%" id="idProducto" html5:placeholder="IdProducto"/>
-                    <h:inputText required="true" requiredMessage="Ingresar el id del tipo producto" value="#{productoSession.prodagr.idTipoProducto.nombreProducto}" class="controls" style="width: 40%"  id="idTipoProducto" html5:placeholder="IdTipoProducto"/>
-                    <h:inputText value="#{productoSession.prodagr.talla}" class="controls" style="width: 40%; margin-right: 8%" id="talla" html5:placeholder="talla"/>
-                    <h:inputText value="#{productoSession.prodagr.tamanio}" class="controls" style="width: 40%"  id="tamanio" html5:placeholder="tamaño"/>
-                    <h:selectOneMenu required="true" requiredMessage="Ingresar el color producto" value="#{productoSession.prodagr.color}" class="controls" style="width: 40%; margin-right:25%" id="color" html5:placeholder="color">
+                    <h4 align="center">Editar producto</h4>
+                    <h:inputText required="true" requiredMessage="Ingresar el id del producto" value="#{productoSession.protem.idProducto}" class="controls" style="width: 40%; margin-right: 8%" id="idProducto" html5:placeholder="IdProducto"/>
+                    <h:inputText required="true" requiredMessage="Ingresar el id del tipo producto" value="#{productoSession.protem.idTipoProducto.nombreProducto}" class="controls" style="width: 40%"  id="idTipoProducto" html5:placeholder="IdTipoProducto"/>
+                    <h:inputText value="#{productoSession.protem.talla}" class="controls" style="width: 40%; margin-right: 8%" id="talla" html5:placeholder="talla"/>
+                    <h:inputText value="#{productoSession.protem.tamanio}" class="controls" style="width: 40%"  id="tamanio" html5:placeholder="tamaño"/>
+                    <h:selectOneMenu required="true" requiredMessage="Ingresar el color producto" value="#{productoSession.protem.color}" class="controls" style="width: 40%; margin-right:25%" id="color" html5:placeholder="color">
                         <f:selectItem itemLabel="Color"></f:selectItem>
                         <f:selectItem itemLabel="Blanco" itemValue="Blanco"></f:selectItem>
                         <f:selectItem itemLabel="Negro" itemValue="Negro"></f:selectItem>
@@ -27,10 +27,10 @@
                         <f:selectItem itemLabel="Verde" itemValue="Verde"></f:selectItem>
                      </h:selectOneMenu> 
                
-                    <h:commandButton class="botons" action="#{productoSession.agregarProducto()}" value="Agregar"/>
+                    <h:commandButton class="botons" action="#{productoSession.editarProducto()}" html5:type="submit" value="Editar"/>
                 </h:form>
             </section>
- 
+
         </main>
     </ui:composition>
 </html>

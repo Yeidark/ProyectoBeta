@@ -12,6 +12,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -22,6 +23,9 @@ import javax.ejb.EJB;
 public class InventarioSession implements Serializable {
 @EJB
 InventarioFacadeLocal inventarioFacadeLocal;
+
+private Inventario stockTem = new Inventario();
+private Inventario stockAgr = new Inventario();
     /**
      * Creates a new instance of InventarioSession
      */
@@ -30,6 +34,58 @@ InventarioFacadeLocal inventarioFacadeLocal;
     
     public List<Inventario> leerTodo(){
         return inventarioFacadeLocal.findAll();
+    }
+    
+        public void agregarStock() {
+        if (inventarioFacadeLocal.agregarStock(stockAgr)) {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + " 'Producto',"
+                    + " 'Agregado con exito', "
+                    + " 'success'"
+                    + ")");;
+        } else {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + " 'Producto',"
+                    + " 'No se pudo agregar', "
+                    + " 'error'"
+                    + ")");
+        }
+
+    }
+    
+    public String cargarStock(Inventario invIn){
+        stockTem = invIn;
+        return "areatrabajo-inventario_stock-editar";
+    }
+    
+    public void editarStock(){
+        try {
+            inventarioFacadeLocal.edit(stockTem);
+        } catch (Exception e) {
+        }
+    }
+    
+    public void removerStock(Inventario invIn){
+        try {
+            inventarioFacadeLocal.remove(invIn);
+        } catch (Exception e) {
+        }
+    }
+
+    public Inventario getStockTem() {
+        return stockTem;
+    }
+
+    public void setStockTem(Inventario stockTem) {
+        this.stockTem = stockTem;
+    }
+
+    public Inventario getStockAgr() {
+        return stockAgr;
+    }
+
+    public void setStockAgr(Inventario stockAgr) {
+        this.stockAgr = stockAgr;
     }
     
 }

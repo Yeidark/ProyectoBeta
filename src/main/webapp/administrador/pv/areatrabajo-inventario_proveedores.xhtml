@@ -6,23 +6,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>  
         
-        <fieldset>
-                <legend>Inventario</legend>
-                            <p><div class="boton">
-                    <input type="submit" value="Modificar" class="btn btn-secondary"/>
-                    <input type="reset" value="Eliminar" class="btn btn-secondary"/>
-                    <a href="#{request.contextPath}/administrador/inventario_proveedores-agregar.xhtml">
-                        <input type="reset" value="Agregar" class="btn btn-secondary"/>
-                    </a>
-                </div></p>
-
         <main>
-                                <fieldset style="width: 80%; margin-left: 35%">
-                        <legend>Proveedores</legend>
-
+            <fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%">
+                
+                
                         <div class="table" style=" overflow: scroll;height: 300px">
                             <table border="1">
-                                <thead>
+                              
                                     <tr>
                                         <th>Nit</th>
 
@@ -33,10 +23,15 @@
                                         <th>Número cedula</th>
 
                                         <th>Nombre Proveedor</th>
+                                        
+                                        <th>Modificar</th>
+                                        
+                                        <th>Eliminar</th>
+                                        
+                                        
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="prov" items="#{proveedorView.leerTodo()}">
+                                <h:form>
+                                    <c:forEach var="prov" items="#{proveedorSession.leerTodo()}">
                                         <tr>
                                             <td>#{prov.nit}</td>
 
@@ -44,19 +39,26 @@
 
                                             <td>#{prov.producto}</td>
 
-                                            <td>#{prov.personas.numeroCedula}</td>
+                                            <td>#{prov.numeroCedula}</td>
 
                                             <td>#{prov.nombreProveedor}</td>
+                                            
+                                            <td><h:commandButton action="#{proveedorSession.cargaProveedor(prov)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
+                                
+                                            <td><h:commandButton action="#{proveedorSession.removerProveedor(prov)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
                                         </tr>
                                     </c:forEach>
-                                </tbody>
+                               </h:form>
                             </table>
 
                         </div>
+                <a href="#{request.contextPath}/administrador/inventario_proveedores-agregar.xhtml" style="margin-left: 87%;">
+                        <input type="reset" value="Agregar" class="btn btn-secondary"/>
+                    </a>
 
                     </fieldset>
         </main>
-                </fieldset>
+               
     </ui:composition>
 </html>
 

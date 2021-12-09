@@ -45,7 +45,7 @@ public class ProveedoresFacade extends AbstractFacade<Proveedores> implements Pr
             prov.setParameter(1, provagr.getNit());
             prov.setParameter(2, provagr.getNombreEmpresa());
             prov.setParameter(3, provagr.getProducto());
-            prov.setParameter(4, provagr.getPersonas().getNumeroCedula());
+            prov.setParameter(4, provagr.getNumeroCedula());
             prov.setParameter(5, provagr.getNombreProveedor());
             prov.executeUpdate();
             return true;

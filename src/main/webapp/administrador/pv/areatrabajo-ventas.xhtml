@@ -16,7 +16,7 @@
                             <th>Fecha</th>
                             <th>Productos Vendidos</th>
                             <th>Total</th>
-                            <th>Inhabilitar</th>
+                            
                         </tr>
                         <c:forEach var="ven" items="#{ventasSession.leerTodo()}">
                             <tr>
@@ -40,7 +40,7 @@
                                     </table>
                                 </td> 
                                 <td>#{ven.valorTotal}</td>
-                                <td><h:selectBooleanCheckbox/></td>
+                               
 
                             </tr>
                         </c:forEach> 
