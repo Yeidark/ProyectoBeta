@@ -58,6 +58,19 @@ public class ClientesFacade extends AbstractFacade<Clientes> implements Clientes
         }
 
     }
+    
+    @Override
+        public Clientes inicioSesion(String correoIn, String contraseniaIn) {
+        try {
+            Query p = em.createQuery("SELECT p FROM personas p WHERE p.correo = :correoIn AND p.contrasenia = :contraseniaIn;");
+            p.setParameter("correoIn", correoIn);
+            p.setParameter("contraseniaIn", contraseniaIn);
+            return (Clientes) p.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
 
 
 }

@@ -5,18 +5,24 @@
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>  
-        <section class="form-registro" style="width: 70%">
+        <section class="form-registro" style="width: 50%">
             <h:form  style="width: 90%">
                 <h4>Datos personales</h4>
-                <h:inputText class="controls" id="PNombre" html5:placeholder="Primer nombre" style="width: 45%;"/>
+                <h:inputText class="controls" id="PNombre" html5:placeholder="Primer nombre" required="true" requiredMessage="Escriba un nombre" style="width: 45%;"/>
+           
                 <h:inputText class="controls" id="SNombre" html5:placeholder="Segundo nombre" style="width: 45%;margin-left: 2%"/>
-                <h:inputText class="controls" id="PApellido" html5:placeholder="Primer apellidos"  style="width: 45%;"/>
+                <h:inputText class="controls" id="PApellido" html5:placeholder="Primer apellidos" required="true" requiredMessage="Escriba un apellido" style="width: 45%;"/>
+       
                 <h:inputText class="controls" id="SApellido" html5:placeholder="Segundo apellidos"  style="width: 45%;margin-left: 2%"/>
-                <h:inputText class="controls" html5:type="email" id="CorreoElectrónico" html5:placeholder="Correo electrónico" style="width: 45%;"/>
-                <h:inputText class="controls" html5:type="date" id="FechaDeNacimiento" html5:placeholder="Fecha de nacimiento"  style="width: 45%;margin-left: 2%"/>
-                <h:inputText class="controls" id="Celular" html5:placeholder="Número de celular" style="width: 45%; "/>
-                <h:inputText class="controls" id="Contraseña" html5:placeholder="Contraseña" style="width: 45%; margin-left: 2%"/>                
-                <h:commandButton class="botons" type="submit" value="Actualizar"/>
+                <h:inputText class="controls" html5:type="email" id="CorreoElectronico" html5:placeholder="Correo electrónico" required="true" requiredMessage="Escriba un correo" style="width: 45%;"/>
+            
+                <h:inputText class="controls" html5:type="date" id="FechaDeNacimiento" html5:placeholder="Fecha de nacimiento" required="true" requiredMessage="Escriba una fecha de nacimiento" style="width: 45%;margin-left: 2%"/>
+              
+                <h:inputText class="controls" id="Celular" html5:placeholder="Número de celular" required="true" requiredMessage="Escriba un número de celular" style="width: 45%; "/>
+               
+                <h:inputText class="controls" id="Contraseña" html5:placeholder="Contraseña" required="true" requiredMessage="Escriba una contraseña" style="width: 45%; margin-left: 2%"/>
+                
+                <h:commandButton class="botons" type="submit" style="margin-left: 4%" value="Actualizar"/>
             </h:form>
         </section>
     </ui:composition>

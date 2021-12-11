@@ -12,6 +12,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -71,6 +72,23 @@ public class ClienteSession implements Serializable {
                     + "'No se pudo actualizar, intente de nuevo'"
                     + "'Error'"
                     + ")");
+        }
+    }
+    
+        public void validarUsuario(){
+        try {
+            logcli = clientesFacadeLocal.inicioSesion(correoIn, contraseniaIn);
+            if(logcli != null){
+                FacesContext fc = FacesContext.getCurrentInstance();
+                fc.getExternalContext().redirect("ingreso.xhtml");
+            }else{
+                PrimeFaces.current().executeScript("Swal.fire("
+                                          + " 'Usuario',"
+                                          + " 'No existe en la nase de datos', "
+                                          + " 'error'"
+                                          +  ")");
+            }
+        } catch (Exception e) {
         }
     }
 

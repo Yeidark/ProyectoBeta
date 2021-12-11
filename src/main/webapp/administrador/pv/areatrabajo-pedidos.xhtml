@@ -18,8 +18,10 @@
                     <th>Medio de pago</th>
                     <th>Direccion</th>
                     <th>Estado</th>
+                    <th>Cambiar Estado</th>
 
                 </tr>
+                <h:form>
                 <c:forEach var="ped" items="#{ventasSession.leerTodo()}">
                     <tr>
                         <td>#{ped.fechaVenta}</td>
@@ -28,19 +30,31 @@
                         <td>#{ped.cantidadProducto}</td>
                         <td>#{ped.idMediosDePago.medioDePago}</td>
                         <td>#{ped.idCliente.personas.tipoDeVia} #{ped.idCliente.personas.numeroVia}#{ped.idCliente.personas.letraVia} #{ped.idCliente.personas.numero} #{ped.idCliente.personas.letra} #{ped.idCliente.personas.numeroApto}</td>
-                        <td>#{ped.idEstadoDeEnvios.estadoDeEnvio}</td>
+                        <td align="center">
+                            <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 1 }">
+                                <button type="button" class="btn btn-primary">En Proceso</button>
+                            </c:if>
+                            <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 2}">
+                                <button type="button" class="btn btn-warning">Enviado</button>
+                            </c:if>
+                            <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 3}">
+                                <button type="button" class="btn btn-success">Entregado</button>
+                            </c:if>
+                            <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 4}">
+                                <button type="button" class="btn btn-danger">Cancelado</button>
+                            </c:if>
+                        
+                        </td>
+                        <td><h:commandButton action="#{ventas.cambiarEstado(ped)}" class="btn btn-outline-danger" value="Cambiar"></h:commandButton></td>
                     </tr>
                 </c:forEach>
+                    </h:form>
             </table> 
                 </div>
             <br/>
             <br/>
         </fieldset>
 
-        <p><div align="center">
-                <input type="submit" value="Agregar" class="btn btn-primary"/>
-                <input type="reset" value="Editar" class="btn btn-primary"/>
-            </div></p>
 
 
     </ui:composition>
