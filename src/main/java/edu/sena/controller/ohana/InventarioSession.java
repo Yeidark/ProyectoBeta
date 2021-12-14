@@ -23,7 +23,9 @@ import org.primefaces.PrimeFaces;
 public class InventarioSession implements Serializable {
 @EJB
 InventarioFacadeLocal inventarioFacadeLocal;
-
+private int idProducto;
+private int idNit;
+        
 private Inventario stockTem = new Inventario();
 private Inventario stockAgr = new Inventario();
     /**
@@ -37,7 +39,7 @@ private Inventario stockAgr = new Inventario();
     }
     
         public void agregarStock() {
-        if (inventarioFacadeLocal.agregarStock(stockAgr)) {
+        if (inventarioFacadeLocal.agregarStock(stockAgr,idProducto,idNit)) {
             PrimeFaces.current().executeScript("Swal.fire("
                     + " 'Producto',"
                     + " 'Agregado con exito', "
@@ -50,6 +52,9 @@ private Inventario stockAgr = new Inventario();
                     + " 'error'"
                     + ")");
         }
+        stockAgr = new Inventario();
+        idProducto = 0;
+        idNit = 0;
 
     }
     
@@ -86,6 +91,22 @@ private Inventario stockAgr = new Inventario();
 
     public void setStockAgr(Inventario stockAgr) {
         this.stockAgr = stockAgr;
+    }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public int getIdNit() {
+        return idNit;
+    }
+
+    public void setIdNit(int idNit) {
+        this.idNit = idNit;
     }
     
 }

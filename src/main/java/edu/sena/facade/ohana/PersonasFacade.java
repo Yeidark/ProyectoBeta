@@ -33,7 +33,7 @@ public class PersonasFacade extends AbstractFacade<Personas> implements Personas
     @Override
     public Personas inicioSesion(String correoIn, String contraseniaIn) {
         try {
-            Query p = em.createQuery("SELECT p FROM personas p WHERE p.correo = :correoIn AND p.contrasenia = :contraseniaIn;");
+            Query p = em.createQuery("SELECT p FROM Personas p WHERE p.correo = :correoIn AND p.contrasenia = :contraseniaIn");
             p.setParameter("correoIn", correoIn);
             p.setParameter("contraseniaIn", contraseniaIn);
             return (Personas) p.getSingleResult();

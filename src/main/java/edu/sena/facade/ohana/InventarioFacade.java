@@ -31,17 +31,18 @@ public class InventarioFacade extends AbstractFacade<Inventario> implements Inve
     }
     
     @Override
-    public boolean agregarStock(Inventario invAgr){
+    public boolean agregarStock(Inventario invAgr, int idProducto, int idNit){
         try {
-            Query sto = em.createNativeQuery("INSERT INTO inventario (idInventario,idProducto,nit,precioUnitario,precioVenta,cantidadStock,fechaIngreso,lote) VALUES (?,?,?,?,?,?,?,?);");
-            sto.setParameter(1, invAgr.getIdInventario());
-            sto.setParameter(2, invAgr.getIdProducto());
-            sto.setParameter(3, invAgr.getNit().getNombreEmpresa());
-            sto.setParameter(4, invAgr.getPrecioUnitario());
-            sto.setParameter(5, invAgr.getPrecioVenta());
-            sto.setParameter(6, invAgr.getCantidadStock());
-            sto.setParameter(7, invAgr.getFechaSalida());
-            sto.setParameter(8, invAgr.getLote());
+            Query sto = em.createNativeQuery("INSERT INTO inventario (idProducto,nit,precioUnitario,precioVenta,cantidadStock,fechaIngreso,lote) VALUES (?,?,?,?,?,?,?);");
+          
+            sto.setParameter(1, idProducto);
+            sto.setParameter(2, idNit);
+            sto.setParameter(3, invAgr.getPrecioUnitario());
+            sto.setParameter(4, invAgr.getPrecioVenta());
+            sto.setParameter(5, invAgr.getCantidadEntrante());
+            sto.setParameter(6, invAgr.getFechaIngreso());
+            sto.setParameter(7, invAgr.getLote());
+            sto.executeUpdate();
             return true;
             
         } catch (Exception e) {

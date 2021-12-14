@@ -30,6 +30,6 @@ public interface InventarioFacadeLocal {
 
     int count();
     
-    public boolean agregarStock(Inventario invAgr);
+    public boolean agregarStock(Inventario invAgr, int idProducto, int idNit);
     
 }
