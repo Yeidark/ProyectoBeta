@@ -14,7 +14,7 @@
                     <h:outputLabel for="TipoProducto" style="margin-right: 80%; font-family: fantasy;font-size: 140%;position: relative">Producto</h:outputLabel>
                     <h:outputLabel for="talla" style="margin-right: 40%; font-family: fantasy;font-size: 140%;position: absolute; right: -130px ">Talla</h:outputLabel><br/>
 
-                    <h:inputText required="true" requiredMessage="Ingresar el tipo del producto" value="#{productoSession.idProducto}" class="controls" id="TipoProducto" html5:placeholder="TipoProducto" style="width: 40%; margin-right: 7%"></h:inputText>
+                    <h:inputText required="true" requiredMessage="Ingresar el tipo del producto" value="#{productoSession.idTipoProducto}" class="controls" id="TipoProducto" html5:placeholder="TipoProducto" style="width: 40%; margin-right: 7%"></h:inputText>
                     
                     <h:selectOneMenu value="#{productoSession.prodagr.talla}" class="controls" style="width: 40%; margin-right: 8%" id="talla" html5:placeholder="talla">
                         <f:selectItem noSelectionOption="Talla"></f:selectItem>

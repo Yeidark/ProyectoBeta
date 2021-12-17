@@ -32,6 +32,7 @@ public class ProductoSession implements Serializable {
     TipoproductosFacadeLocal tipoproductosFacadeLocal;
    
    private int idProducto;
+   private int idTipoProducto;
   
            
     private Productos prodagr = new Productos();
@@ -54,7 +55,7 @@ public class ProductoSession implements Serializable {
     }
 
     public void agregarProducto() {
-        if (productosFacadeLocal.agregarProducto(prodagr)) {
+        if (productosFacadeLocal.agregarProducto(prodagr,idProducto,idTipoProducto)) {
             PrimeFaces.current().executeScript("Swal.fire("
                     + " 'Producto',"
                     + " 'Agregado con exito', "
@@ -67,7 +68,9 @@ public class ProductoSession implements Serializable {
                     + " 'error'"
                     + ")");
         }
-
+    prodagr = new Productos();
+    idProducto = 0;
+    idTipoProducto = 0;
     }
 
     public String cargaProducto(Productos proIn) {
@@ -83,7 +86,7 @@ public class ProductoSession implements Serializable {
                     + " 'Actualizado con exito', "
                     + " 'success'"
                     + ")");
-
+         
         } catch (Exception e) {
             PrimeFaces.current().executeScript("Swal.fire("
                     + " 'Producto',"
@@ -148,6 +151,14 @@ public class ProductoSession implements Serializable {
 
     public void setListaproductos(ArrayList<Productos> listaproductos) {
         this.listaproductos = listaproductos;
+    }
+
+    public int getIdTipoProducto() {
+        return idTipoProducto;
+    }
+
+    public void setIdTipoProducto(int idTipoProducto) {
+        this.idTipoProducto = idTipoProducto;
     }
 
     

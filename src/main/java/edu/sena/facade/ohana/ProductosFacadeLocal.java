@@ -31,7 +31,7 @@ public interface ProductosFacadeLocal {
     int count();
 
     public List<Productos> leerTodo();
-
-    public boolean agregarProducto(Productos prodagr);
+    
+    public boolean agregarProducto(Productos prodagr, int idProducto, int idTipoProducto);
     
 }

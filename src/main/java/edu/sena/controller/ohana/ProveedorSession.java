@@ -1,4 +1,3 @@
-
 package edu.sena.controller.ohana;
 
 import edu.sena.entity.ohana.Proveedores;
@@ -23,7 +22,6 @@ public class ProveedorSession implements Serializable {
 
     private Proveedores provagr = new Proveedores();
     private Proveedores ProvTem = new Proveedores();
-    
 
     public ProveedorSession() {
     }
@@ -46,15 +44,15 @@ public class ProveedorSession implements Serializable {
                     + " 'error'"
                     + ")");
         }
-
+        provagr = new Proveedores();
     }
-    
-    public String cargaProveedor(Proveedores provIn){
+
+    public String cargaProveedor(Proveedores provIn) {
         ProvTem = provIn;
         return "inventario_proveedores-editar";
     }
-    
-    public void editarProveedor(){
+
+    public void editarProveedor() {
         try {
             proveedoresFacadeLocal.edit(ProvTem);
             PrimeFaces.current().executeScript("Swal.fire("
@@ -69,10 +67,10 @@ public class ProveedorSession implements Serializable {
                     + " 'error'"
                     + ")");
         }
-        
+
     }
-    
-    public void removerProveedor(Proveedores provIn){
+
+    public void removerProveedor(Proveedores provIn) {
         try {
             proveedoresFacadeLocal.remove(provIn);
             PrimeFaces.current().executeScript("Swal.fire("
@@ -88,8 +86,6 @@ public class ProveedorSession implements Serializable {
                     + ")");
         }
     }
-    
-    
 
     public Proveedores getProvagr() {
         return provagr;
@@ -106,8 +102,5 @@ public class ProveedorSession implements Serializable {
     public void setProvTem(Proveedores ProvTem) {
         this.ProvTem = ProvTem;
     }
-
-
-
 
 }

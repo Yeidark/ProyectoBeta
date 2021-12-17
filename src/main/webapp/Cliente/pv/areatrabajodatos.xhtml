@@ -15,8 +15,10 @@
                                     <h:inputText 
                                         required="true"
                                         requiredMessage="Ingresar un numero de documento"
-                                        value="#{PersonaSession.perLogin.numerocedula}" 
-                                        class="botons" id="new_doc"/>
+                                        value="#{personaSession.perLogin.numeroCedula}" 
+                                        class="botons" id="new_doc"
+                                        disabled="true">
+                                    </h:inputText>
                                 </div>
 
                                 <div class="form-group">
@@ -24,32 +26,33 @@
                                     <h:inputText
                                         required="true"
                                         requiredMessage="Ingresar un nombre."
-                                        value="#{PersonaSession.perLogin.primernombre}" class="botons" id="new_nombres" alt="Nombres"/>
+                                        value="#{personaSession.perLogin.primerNombre}" class="botons" id="new_nombres" alt="Nombres">
+                                    </h:inputText>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel for="new_apellidos">Apellidos</h:outputLabel>
                                     <h:inputText 
                                         required="true"
                                         requiredMessage="Ingresar un apellido"
-                                        value="#{PersonaSession.perLogin.primerApellido}" class="botons" id="new_apellidos" alt="Apellidos" />
+                                        value="#{personaSession.perLogin.primerApellido}" class="botons" id="new_apellidos" alt="Apellidos" />
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel for="new_correo">Correo</h:outputLabel>
                                     <h:inputText 
                                         required="true"
                                         requiredMessage="Ingresar correo electronico"
-                                        value="#{PersonaSession.perLogin.Correo}"  class="botons" id="new_correo" alt ="Correo"/>
+                                        value="#{personaSession.perLogin.correo}"  class="botons" id="new_correo" alt ="Correo"/>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel for="new_clave">Contraseña</h:outputLabel>
                                     <h:inputSecret 
                                         required="true"
                                         requiredMessage="Ingresar una clave"
-                                        value="#{ClienteSession.perLogin.contrasenia}" class="botons" id="new_clave" alt ="Clave"/>
+                                        value="#{personaSession.perLogin.contrasenia}" class="botons" id="new_clave" alt ="Clave"/>
                                 </div>
 
 
-                                <h:commandButton type="submit" action="#{ClienteSession.actualizarDatos()}" class="btn btn-success mr-2" value="Guardar" ></h:commandButton>
+                                <h:commandButton type="submit" action="#{personaSession.actualizarDatos()}" class="btn btn-success" value="Guardar" ></h:commandButton>
                                 
                             </h:form>
             </section>

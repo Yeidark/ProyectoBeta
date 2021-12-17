@@ -64,6 +64,7 @@ public class PersonasFacade extends AbstractFacade<Personas> implements Personas
         }
 
     }
+  
 
     @Override
     public Personas inicioSesion(String correoIn, String contraseniaIn) {

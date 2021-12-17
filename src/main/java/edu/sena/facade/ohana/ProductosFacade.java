@@ -40,14 +40,13 @@ public class ProductosFacade extends AbstractFacade<Productos> implements Produc
     }
 
     @Override
-    public boolean agregarProducto(Productos prodagr) {
+    public boolean agregarProducto(Productos prodagr, int idProducto, int idTipoProducto) {
         try {
-            Query prod = em.createNativeQuery("INSERT INTO productos (idProducto,idTipoProducto,talla,tamanio,color) VALUES (?,?,?,?,?);");
-            prod.setParameter(1, prodagr.getIdProducto());
-            prod.setParameter(2, prodagr.getIdTipoProducto().getIdTipoProducto());
-            prod.setParameter(3, prodagr.getTalla());
-            prod.setParameter(4, prodagr.getTamanio());
-            prod.setParameter(5, prodagr.getColor());
+            Query prod = em.createNativeQuery("INSERT INTO productos (idTipoProducto,talla,tamanio,color) VALUES (?,?,?,?);");
+            prod.setParameter(1, idTipoProducto);
+            prod.setParameter(2, prodagr.getTalla());
+            prod.setParameter(3, prodagr.getTamanio());
+            prod.setParameter(4, prodagr.getColor());
             prod.executeUpdate();
             return true;
 
@@ -56,5 +55,6 @@ public class ProductosFacade extends AbstractFacade<Productos> implements Produc
         }
 
     }
+
 
 }

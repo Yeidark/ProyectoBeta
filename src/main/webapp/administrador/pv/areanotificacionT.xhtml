@@ -4,19 +4,25 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>  
-            <header>
-                <a href="interfaztrabajadores.xhtml">
-                    <img class="logo" src="#{request.contextPath}/assets/img/Logo.nuevo.jpeg" alt="logoOhana"/>
-                </a>
-                <nav class="li" style="font-size: 25px">
-                    <li class="lo"><a href="ventas.xhtml" class="al">Ventas</a></li>
-                    <li class="lo"><a href="pedidos.xhtml" class="al">Pedidos</a></li>
-                    <li class="lo"><a href="inventarios.xhtml" class="al">Inventario</a></li>
-                    <li class="lo"><a href="inventario_clientes.xhtml" class="al">Clientes</a></li>      
-                    <li class="lo"><a href="tra_datospersonales.xhtml" class="al">Mi cuenta</a></li>
-                    <li class="lo"><a href="../general/ohana.xhtml" class="al">Cerrar sesión</a></li>
-                </nav>
-            </header> 
+        <header>
+            <a href="interfaztrabajadores.xhtml">
+                <img class="logo" src="#{request.contextPath}/assets/img/Logo.nuevo.jpeg" alt="logoOhana"/>
+            </a>
+            <nav class="li" style="font-size: 25px">
+                <li class="lo"><a href="ventas.xhtml" class="al">Ventas</a></li>
+                <li class="lo"><a href="pedidos.xhtml" class="al">Pedidos</a></li>
+                <li class="lo"><a href="inventarios.xhtml" class="al">Inventario</a></li>
+                <li class="lo"><a href="inventario_clientes.xhtml" class="al">Clientes</a></li>      
+                <li class="lo"><a href="tra_datospersonales.xhtml" class="al">Mi cuenta</a></li>
+
+                <li class="lo">
+                    <h:form >
+                        <h:commandButton style="background-color: #97d2fa; border:0px" action="#{personaSession.cerrarSesion()}" class="al" value="Cerrar Sesión"></h:commandButton>
+                    </h:form>
+                </li>
+
+            </nav>
+        </header> 
     </ui:composition>
 </html>
 

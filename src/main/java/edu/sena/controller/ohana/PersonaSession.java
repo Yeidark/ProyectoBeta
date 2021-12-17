@@ -69,13 +69,13 @@ public class PersonaSession implements Serializable {
             PrimeFaces.current().executeScript("Swal.fire("
                     + "'Usuario',"
                     + "'Registrado con exito !!!',"
-                    + "'Success'"
+                    + "'success',"
                     + ")");
         } else {
             PrimeFaces.current().executeScript("Swal.fire("
                     + "'Usuario',"
                     + "'No se pudo registrar , intente de nuevo',"
-                    + "'Error'"
+                    + "'error',"
                     + ")");
         }
 
@@ -86,13 +86,13 @@ public class PersonaSession implements Serializable {
             PrimeFaces.current().executeScript("Swal.fire("
                     + "'Usuario',"
                     + "'Registrado con exito !!!',"
-                    + "'Success'"
+                    + "'success',"
                     + ")");
         } else {
             PrimeFaces.current().executeScript("Swal.fire("
                     + "'Usuario',"
                     + "'No se pudo registrar , intente de nuevo',"
-                    + "'Error'"
+                    + "'error',"
                     + ")");
         }
     }
@@ -103,20 +103,20 @@ public class PersonaSession implements Serializable {
                 PrimeFaces.current().executeScript("Swal.fire("
                         + "'Usuario',"
                         + "'Registrado con exito !!!',"
-                        + "'Success'"
+                        + "'success',"
                         + ")");
             } else {
                 PrimeFaces.current().executeScript("Swal.fire("
                         + "'Usuario',"
                         + "'No se pudo registrar , intente de nuevo',"
-                        + "'Error'"
+                        + "'error',"
                         + ")");
             }
         } catch (Exception e) {
             PrimeFaces.current().executeScript("Swal.fire("
                     + "'Usuario',"
                     + "'No se pudo actualizar, intente de nuevo',"
-                    + "'Error'"
+                    + "'error',"
                     + ")");
         }
 
@@ -126,7 +126,7 @@ public class PersonaSession implements Serializable {
         perLogin = null;
         FacesContext fc = FacesContext.getCurrentInstance();
         fc.getExternalContext().invalidateSession();
-        fc.getExternalContext().redirect("ohana.xhtml");
+        fc.getExternalContext().redirect("../general/ohana.xhtml");
     }
 
     public void actualizarDatos() {
@@ -135,13 +135,13 @@ public class PersonaSession implements Serializable {
             PrimeFaces.current().executeScript("Swal.fire("
                     + "'Usuario',"
                     + "'Actualizado con exito !!!',"
-                    + "'Success'"
+                    + "'success',"
                     + ")");
         } catch (Exception e) {
             PrimeFaces.current().executeScript("Swal.fire("
                     + "'Usuario',"
                     + "'No se pudo actualizar, intente de nuevo',"
-                    + "'Error'"
+                    + "'error',"
                     + ")");
         }
     }

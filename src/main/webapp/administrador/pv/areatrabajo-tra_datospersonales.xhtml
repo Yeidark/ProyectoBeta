@@ -17,11 +17,13 @@
                 <h:inputText class="controls" value="#{personaSession.perLogin.primerApellido}" id="PApellido" required="true" requiredMessage="Escriba un apellido" style="width: 45%;"/>
 
                 <h:inputText class="controls" value="#{personaSession.perLogin.segundoApellido}" id="SApellido" style="width: 45%;margin-left: 2%"/>
-                <h:inputText class="controls" value="#{personaSession.perLogin.correo}" html5:type="email" id="CorreoElectronico" required="true" requiredMessage="Escriba un correo" style="width: 45%;"/>
+                <h:inputText class="controls" disabled="true" value="#{personaSession.perLogin.correo}" html5:type="email" id="CorreoElectronico" required="true" requiredMessage="Escriba un correo" style="width: 45%;"/>
 
                 <h:inputText class="controls" value="#{personaSession.perLogin.fechaDeNacimiento}" html5:type="date" id="FechaDeNacimiento" html5:placeholder="Fecha de nacimiento" required="true" requiredMessage="Escriba una fecha de nacimiento" style="width: 45%;margin-left: 2%">
                     <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>                     
                 </h:inputText>
+                
+                <h:inputText class="controls" disabled="true" value="#{personaSession.perLogin.numeroCedula}" id="Cedula" required="true" requiredMessage="Escriba un número de cedula" style="width: 45%; margin-right: 2% "/>
 
                 <h:inputText class="controls" value="#{personaSession.perLogin.numeroCelular}" id="Celular" required="true" requiredMessage="Escriba un número de celular" style="width: 45%; "/>
 
