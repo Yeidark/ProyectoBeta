@@ -32,8 +32,6 @@ public interface ClientesFacadeLocal {
     
     public List<Clientes> leerTodo();
     
-    public boolean crearCliente(Clientes crecli);
-    
     public Clientes inicioSesion(String correoIn, String contraseniaIn); 
     
 }

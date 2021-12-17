@@ -6,11 +6,15 @@
 package edu.sena.controller.ohana;
 
 import edu.sena.entity.ohana.Productos;
+import edu.sena.entity.ohana.Tipoproductos;
 import edu.sena.facade.ohana.ProductosFacadeLocal;
+import edu.sena.facade.ohana.TipoproductosFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import org.primefaces.PrimeFaces;
 
@@ -24,11 +28,25 @@ public class ProductoSession implements Serializable {
 
    @EJB
     ProductosFacadeLocal productosFacadeLocal;
-
+   @EJB
+    TipoproductosFacadeLocal tipoproductosFacadeLocal;
+   
+   private int idProducto;
+  
+           
     private Productos prodagr = new Productos();
     private Productos protem = new Productos();
     
+    private ArrayList<Tipoproductos> listaProducto = new ArrayList<>();
+    private ArrayList<Productos> listaproductos = new ArrayList<>();
+    
     public ProductoSession() {
+    }
+    
+    @PostConstruct
+    public void init(){
+        listaProducto.addAll(tipoproductosFacadeLocal.findAll());
+        listaproductos.addAll(productosFacadeLocal.findAll());
     }
     
      public List<Productos> leerTodo() {
@@ -107,5 +125,30 @@ public class ProductoSession implements Serializable {
     public void setProtem(Productos protem) {
         this.protem = protem;
     }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public ArrayList<Tipoproductos> getListaProducto() {
+        return listaProducto;
+    }
+
+    public void setListaProducto(ArrayList<Tipoproductos> listaProducto) {
+        this.listaProducto = listaProducto;
+    }
+
+    public ArrayList<Productos> getListaproductos() {
+        return listaproductos;
+    }
+
+    public void setListaproductos(ArrayList<Productos> listaproductos) {
+        this.listaproductos = listaproductos;
+    }
+
     
 }

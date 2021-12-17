@@ -24,6 +24,7 @@ public class PersonaSession implements Serializable {
     @EJB
     PersonasFacadeLocal personasFacadeLocal;
 
+    private Personas perCre = new Personas();
     private Personas perLogin = new Personas();
     private String correoIn = "";
     private String contraseniaIn = "";
@@ -36,14 +37,14 @@ public class PersonaSession implements Serializable {
             perLogin = personasFacadeLocal.inicioSesion(correoIn, contraseniaIn);
             if (perLogin != null) {
                 if (perLogin.getRolesCollection().size() == 1) {
-                    ArrayList<Roles> Rol =  new ArrayList<>(perLogin.getRolesCollection());
+                    ArrayList<Roles> Rol = new ArrayList<>(perLogin.getRolesCollection());
                     if (Rol.get(0).getNombreRol().equalsIgnoreCase("Administrador")) {
                         FacesContext fc = FacesContext.getCurrentInstance();
                         fc.getExternalContext().redirect("../administrador/interfaztrabajadores.xhtml");
-                    } else if(perLogin.getRolesCollection().isEmpty()) {
+                    } else if (perLogin.getRolesCollection().isEmpty()) {
                         FacesContext fc = FacesContext.getCurrentInstance();
                         fc.getExternalContext().redirect("index.xhtml");
-                    }else {
+                    } else {
                         FacesContext fc = FacesContext.getCurrentInstance();
                         fc.getExternalContext().redirect("../Cliente/ClientePaginaprincipal.xhtml");
                     }
@@ -55,7 +56,7 @@ public class PersonaSession implements Serializable {
             } else {
                 PrimeFaces.current().executeScript("Swal.fire("
                         + " 'Usuario',"
-                        + " 'No existe en la nase de datos', "
+                        + " 'No existe en la base de datos', "
                         + " 'error'"
                         + ")");
             }
@@ -63,11 +64,86 @@ public class PersonaSession implements Serializable {
         }
     }
 
+    public void crearCliente() {
+        if (personasFacadeLocal.crearCliente(perCre)) {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + "'Usuario',"
+                    + "'Registrado con exito !!!',"
+                    + "'Success'"
+                    + ")");
+        } else {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + "'Usuario',"
+                    + "'No se pudo registrar , intente de nuevo',"
+                    + "'Error'"
+                    + ")");
+        }
+
+    }
+
+    public void agregarCliente() {
+        if (personasFacadeLocal.agregarCliente(perCre)) {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + "'Usuario',"
+                    + "'Registrado con exito !!!',"
+                    + "'Success'"
+                    + ")");
+        } else {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + "'Usuario',"
+                    + "'No se pudo registrar , intente de nuevo',"
+                    + "'Error'"
+                    + ")");
+        }
+    }
+
+    public void guardar() {
+        try {
+            if (personasFacadeLocal.crearCliente(perCre) && personasFacadeLocal.agregarCliente(perCre)) {
+                PrimeFaces.current().executeScript("Swal.fire("
+                        + "'Usuario',"
+                        + "'Registrado con exito !!!',"
+                        + "'Success'"
+                        + ")");
+            } else {
+                PrimeFaces.current().executeScript("Swal.fire("
+                        + "'Usuario',"
+                        + "'No se pudo registrar , intente de nuevo',"
+                        + "'Error'"
+                        + ")");
+            }
+        } catch (Exception e) {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + "'Usuario',"
+                    + "'No se pudo actualizar, intente de nuevo',"
+                    + "'Error'"
+                    + ")");
+        }
+
+    }
+
     public void cerrarSesion() throws IOException {
         perLogin = null;
         FacesContext fc = FacesContext.getCurrentInstance();
         fc.getExternalContext().invalidateSession();
         fc.getExternalContext().redirect("ohana.xhtml");
+    }
+
+    public void actualizarDatos() {
+        try {
+            personasFacadeLocal.edit(perLogin);
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + "'Usuario',"
+                    + "'Actualizado con exito !!!',"
+                    + "'Success'"
+                    + ")");
+        } catch (Exception e) {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + "'Usuario',"
+                    + "'No se pudo actualizar, intente de nuevo',"
+                    + "'Error'"
+                    + ")");
+        }
     }
 
     public Personas getPerLogin() {
@@ -92,6 +168,14 @@ public class PersonaSession implements Serializable {
 
     public void setContraseniaIn(String contraseniaIn) {
         this.contraseniaIn = contraseniaIn;
+    }
+
+    public Personas getPerCre() {
+        return perCre;
+    }
+
+    public void setPerCre(Personas perCre) {
+        this.perCre = perCre;
     }
 
 }

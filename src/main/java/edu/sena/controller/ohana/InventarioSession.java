@@ -6,11 +6,18 @@
 package edu.sena.controller.ohana;
 
 import edu.sena.entity.ohana.Inventario;
+import edu.sena.entity.ohana.Proveedores;
+import edu.sena.entity.ohana.Tipoproductos;
 import edu.sena.facade.ohana.InventarioFacadeLocal;
+import edu.sena.facade.ohana.ProductosFacadeLocal;
+import edu.sena.facade.ohana.ProveedoresFacadeLocal;
+import edu.sena.facade.ohana.TipoproductosFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import org.primefaces.PrimeFaces;
 
@@ -23,15 +30,26 @@ import org.primefaces.PrimeFaces;
 public class InventarioSession implements Serializable {
 @EJB
 InventarioFacadeLocal inventarioFacadeLocal;
+@EJB
+TipoproductosFacadeLocal tipoproductosFacadeLocal;
+@EJB
+ProveedoresFacadeLocal proveedoresFacadeLocal;
 private int idProducto;
 private int idNit;
         
 private Inventario stockTem = new Inventario();
 private Inventario stockAgr = new Inventario();
-    /**
-     * Creates a new instance of InventarioSession
-     */
+
+    private ArrayList<Tipoproductos> ListaProductos = new ArrayList<>();
+    private ArrayList<Proveedores> ListaProveedores = new ArrayList<>();   
+    
     public InventarioSession() {
+    }
+    
+    @PostConstruct
+    public void init(){
+        ListaProductos.addAll(tipoproductosFacadeLocal.findAll());
+        ListaProveedores.addAll(proveedoresFacadeLocal.findAll());
     }
     
     public List<Inventario> leerTodo(){
@@ -66,14 +84,34 @@ private Inventario stockAgr = new Inventario();
     public void editarStock(){
         try {
             inventarioFacadeLocal.edit(stockTem);
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + " 'Producto',"
+                    + " 'Editado con exito', "
+                    + " 'success'"
+                    + ")");;
         } catch (Exception e) {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + " 'Producto',"
+                    + " 'No se pudo editar', "
+                    + " 'error'"
+                    + ")");
         }
     }
     
     public void removerStock(Inventario invIn){
         try {
             inventarioFacadeLocal.remove(invIn);
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + " 'Producto',"
+                    + " 'Eliminado con exito', "
+                    + " 'success'"
+                    + ")");;
         } catch (Exception e) {
+            PrimeFaces.current().executeScript("Swal.fire("
+                    + " 'Producto',"
+                    + " 'No se pudo eliminar', "
+                    + " 'error'"
+                    + ")");
         }
     }
 
@@ -108,5 +146,25 @@ private Inventario stockAgr = new Inventario();
     public void setIdNit(int idNit) {
         this.idNit = idNit;
     }
+
+    public ArrayList<Tipoproductos> getListaProductos() {
+        return ListaProductos;
+    }
+
+    public void setListaProductos(ArrayList<Tipoproductos> ListaProductos) {
+        this.ListaProductos = ListaProductos;
+    }
+
+    public ArrayList<Proveedores> getListaProveedores() {
+        return ListaProveedores;
+    }
+
+    public void setListaProveedores(ArrayList<Proveedores> ListaProveedores) {
+        this.ListaProveedores = ListaProveedores;
+    }
+
+
+
+
     
 }

@@ -5,17 +5,15 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>  
-        
+
 
 
         <main>
             <fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%">
-                
-                
-               
 
-                <div class="table" style=" overflow: scroll;height: 300px">
-                    <table border="1">
+
+                <div class="table" style="overflow: scroll;height: 300px">
+                    <table border="1" id="produ">
                         <tr>
                             <th width="20%">id Producto</th>
 
@@ -26,45 +24,47 @@
                             <th width="20%">Tamaño</th>
 
                             <th width="20%">Color</th>
-                            
+
                             <th width="20%">Modificar</th>
-                            
+
                             <th width="20%">Eliminar</th>
-                           
+
                         </tr>
                         <h:form>
                             <c:forEach var="prod" items="#{productoSession.leerTodo()}">
-                            <tr>
-                                <td>#{prod.idProducto}</td>
+                                <tr>
+                                    <td>#{prod.idProducto}</td>
 
-                                <td>#{prod.idTipoProducto.nombreProducto}</td>
+                                    <td>#{prod.idTipoProducto.nombreProducto}</td>
 
-                                <td>#{prod.talla}</td>
+                                    <td>#{prod.talla}</td>
 
-                                <td>#{prod.tamanio}</td>
+                                    <td>#{prod.tamanio}</td>
 
-                                <td>#{prod.color}</td>
-                                
-                                <td><h:commandButton action="#{productoSession.cargaProducto(prod)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
-                                
-                                <td><h:commandButton action="#{productoSession.removerproducto(prod)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
-                            </tr>
-                        </c:forEach>
-                            
+                                    <td>#{prod.color}</td>
+
+                                    <td><h:commandButton action="#{productoSession.cargaProducto(prod)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
+
+                                    <td><h:commandButton action="#{productoSession.removerproducto(prod)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
+                                </tr>
+                            </c:forEach>
+
                         </h:form>   
-                        
+
                     </table>
-                    
-                   
                 </div>
-                 <a href="#{request.contextPath}/administrador/inventario_agregarproductos.xhtml" style="margin-left: 87%;">
-                        <input type="reset" value="Agregar" class="btn btn-secondary"/>
+
+                <div class="btn-group" role="group" aria-label="Basic example" style="margin-left: 78%">
+                    <a href="#{request.contextPath}/administrador/inventario_agregarproductos.xhtml" >
+                        <button  type="button" class="btn btn-outline-danger">Agregar</button>
                     </a>
+                    <button onclick="ExportToExcel('produ')" type="button" class="btn btn-outline-danger">Exportar</button>
+                </div>
             </fieldset>
-            
+
         </main>
-        
-        
+
+
     </ui:composition>
 </html>
 

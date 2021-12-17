@@ -4,25 +4,28 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition>  
         <h:form>
-            <fieldset>
-                <legend>Ventas Realizadas</legend>
-                <div style=" overflow: scroll;height: 300px">
-                    <table>
+            
+            <legend style="font-family: fantasy;font-size: 200%; margin-left: 41%">Ventas Realizadas</legend>
+                <div style=" overflow: scroll;height: 300px;" >
+                    <table id="vent" border="1">
                         <tr>
                             <th>Id</th>
                             <th>Fecha</th>
                             <th>Productos Vendidos</th>
                             <th>Total</th>
-                            
+
                         </tr>
                         <c:forEach var="ven" items="#{ventasSession.leerTodo()}">
                             <tr>
 
                                 <td>#{ven.idVentas}</td>
-                                <td>#{ven.fechaVenta}</td>
+                                <td><h:outputText value="#{ven.fechaVenta}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+                                    </h:outputText> </td>
 
                                 <td><table>
 
@@ -40,7 +43,7 @@
                                     </table>
                                 </td> 
                                 <td>#{ven.valorTotal}</td>
-                               
+
 
                             </tr>
                         </c:forEach> 
@@ -48,11 +51,9 @@
                 </div>
 
                 <p><div align="center">
-                        <h:commandButton type="submit" value="Agregar" class="btn btn-primary"/>
-                        <h:commandButton type="reset" value="Editar" class="btn btn-primary"/>
-                    </div></p>
-
-            </fieldset>
+                        <h:commandButton onclick="ExportToExcel('vent')" class="btn btn-outline-danger" value="Exportar" style=""></h:commandButton> 
+                </div></p>
+      
         </h:form>
     </ui:composition>
 </html>

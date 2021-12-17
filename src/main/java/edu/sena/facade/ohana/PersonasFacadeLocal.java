@@ -30,9 +30,13 @@ public interface PersonasFacadeLocal {
 
     int count();
     
+    public boolean crearCliente(Personas perCre);
+    
     public Personas inicioSesion(String correoIn, String contraseniaIn);
     
     public Personas recuperarContraseña(String correoIn);
+    
+    public boolean agregarCliente(Personas perCre);
     
     
 }

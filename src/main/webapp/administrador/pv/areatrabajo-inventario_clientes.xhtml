@@ -4,14 +4,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition>  
-       
-           <legend style="font-family: fantasy; font-size: 400%; margin-left: 38%">Clientes</legend>
-        <main style="margin:6%; overflow: scroll; height:500px">
-             
-            <table >
-               
+        <legend style="font-family: fantasy; font-size: 200%; margin-left: 45%">Clientes</legend>
+        <main style="overflow: scroll; height:300px;">
+            <table id="Clientes" border="1px">
+
                 <tr align="center"> 
                     <th>IdCliente</th>
                     <th>Primer nombre</th> 
@@ -26,37 +25,41 @@
                     <th>Cambiar estado</th>
                 </tr>
                 <h:form>
-                <c:forEach var="cli" items="#{clienteSession.leerTodo()}">
-                    <tr>
-                        <td>#{cli.idClientes}</td>
-                        <td>#{cli.personas.primerNombre}</td>
-                        <td>#{cli.personas.segundoNombre}</td>
-                        <td>#{cli.personas.primerApellido}</td>
-                        <td>#{cli.personas.segundoApellido}</td>
-                        <td>#{cli.personas.correo}</td>
-                        <td>#{cli.personas.numeroCelular}</td>
-                        <td>#{cli.personas.tipoDeVia} #{cli.personas.numeroVia}#{cli.personas.letraVia} #{cli.personas.numero} #{cli.personas.letra} #{cli.personas.numeroApto}</td>
-                        <td>#{cli.personas.fechaDeNacimiento}</td>
-                        <td>
-                            <c:if test="#{cli.estados == 1}">
-                                <button type="button" class="btn btn-success">A</button>
-                            </c:if>
-                            <c:if test="#{cli.estados == 0}">
-                                <button type="button" class="btn btn-warning">I</button>
-                            </c:if>
-                        
-                        </td>
-                        <td><h:commandButton action="#{clienteSession.cambiarEstado(cli)}" class="btn btn-outline-danger" value="Cambiar"></h:commandButton></td>
-                    </tr>
-                </c:forEach>
-                    </h:form>
-            </table>
-           
-        </main> 
-       
-            
+                    <c:forEach var="cli" items="#{clienteSession.leerTodo()}">
+                        <tr>
+                            <td>#{cli.idClientes}</td>
+                            <td>#{cli.personas.primerNombre}</td>
+                            <td>#{cli.personas.segundoNombre}</td>
+                            <td>#{cli.personas.primerApellido}</td>
+                            <td>#{cli.personas.segundoApellido}</td>
+                            <td>#{cli.personas.correo}</td>
+                            <td>#{cli.personas.numeroCelular}</td>
+                            <td>#{cli.personas.tipoDeVia} #{cli.personas.numeroVia}#{cli.personas.letraVia} #{cli.personas.numero} #{cli.personas.letra} #{cli.personas.numeroApto}</td>
+                            <td><h:outputText value="#{cli.personas.fechaDeNacimiento}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+                                </h:outputText></td>
+                            <td>
+                                <c:if test="#{cli.estados == 1}">
+                                    <button type="button" class="btn btn-success">A</button>
+                                </c:if>
+                                <c:if test="#{cli.estados == 0}">
+                                    <button type="button" class="btn btn-warning">I</button>
+                                </c:if>
 
-        
+                            </td>
+                            <td><h:commandButton action="#{clienteSession.cambiarEstado(cli)}" class="btn btn-outline-danger" value="Cambiar"></h:commandButton></td>
+                        </tr>
+
+                    </c:forEach>
+
+                </h:form>
+
+            </table>
+            
+        </main>
+        <p><div align="center">
+                        <h:commandButton onclick="ExportToExcel('vent')" class="btn btn-outline-danger" value="Exportar" style=""></h:commandButton> 
+                </div></p>
     </ui:composition>
 </html>
 

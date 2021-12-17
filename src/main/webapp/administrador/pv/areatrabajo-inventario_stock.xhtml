@@ -3,71 +3,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition>  
-        
+
         <main>
             <fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%">
 
-            
+
 
                 <div class="table" style=" overflow: scroll;height: 300px">
-                    <table border="1">
+                    <table border="1" id="stoc">
                         <tr>
-                            <th width="100px">Id inventario</th>
+                            <th width="40px">Id inventario</th>
 
-                            <th width="100px">Id Producto</th>  
+                            <th>Id Producto</th>  
 
-                            <th width="300px">Proveedor</th>
+                            <th>Proveedor</th>
 
-                            <th width="100px">Precio unitario</th>
+                            <th>Precio unitario</th>
 
-                            <th width="100px">Precio venta</th>
+                            <th>Precio venta</th>
 
-                            <th width="200px">Cantidad en stock</th>
+                            <th>Cantidad en stock</th>
 
                             <th width="1000px">Fecha de ingreso</th>
 
-                            <th width="100px">Lote</th>
+                            <th>Lote</th>
 
-                            <th width="100px">Modificar</th>
+                            <th>Modificar</th>
 
-                            <th width="100px">Eliminar</th>
+                            <th>Eliminar</th>
 
                         </tr>
                         <h:form>
-                        <c:forEach var="prosa" items="#{inventarioSession.leerTodo()}">
-                            <tr>
-                                <td>#{prosa.idInventario}</td>
+                            <c:forEach var="prosa" items="#{inventarioSession.leerTodo()}">
+                                <tr>
+                                    <td>#{prosa.idInventario}</td>
 
-                                <td>#{prosa.idProducto.idProducto}</td>
+                                    <td>#{prosa.idProducto.idProducto}</td>
 
-                                <td>#{prosa.nit.nombreEmpresa}</td>
+                                    <td>#{prosa.nit.nombreEmpresa}</td>
 
-                                <td>#{prosa.precioUnitario}</td>
+                                    <td>#{prosa.precioUnitario}</td>
 
-                                <td>#{prosa.precioVenta}</td>
+                                    <td>#{prosa.precioVenta}</td>
 
-                                <td>#{prosa.cantidadStock}</td>
+                                    <td>#{prosa.cantidadStock}</td>
 
-                                <td>#{prosa.fechaIngreso}</td>
+                                    <td><h:outputText value="#{prosa.fechaIngreso}">
+                                            <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+                                        </h:outputText></td>
 
-                                <td>#{prosa.lote}</td>
-                                
-                                <td><h:commandButton action="#{inventarioSession.cargarStock(prosa)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
-                                
-                                <td><h:commandButton action="#{inventarioSession.removerStock(prosa)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
-                            </tr>
-                        </c:forEach>
+                                    <td>#{prosa.lote}</td>
+
+                                    <td><h:commandButton action="#{inventarioSession.cargarStock(prosa)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
+
+                                    <td><h:commandButton action="#{inventarioSession.removerStock(prosa)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
+                                </tr>
+                            </c:forEach>
                         </h:form>
                     </table>
                 </div>
+                <div class="btn-group" role="group" aria-label="Basic example" style="margin-left: 78%">
                     <a href="#{request.contextPath}/administrador/inventario_stock-agregar.xhtml">
-                    <input type="reset" value="Agregar" class="btn btn-secondary" style="margin-left: 87%;"/>
-                </a>
+                        <button  type="button" class="btn btn-outline-danger">Agregar</button>
+                    </a>
+                    <button onclick="ExportToExcel('stoc')" type="button" class="btn btn-outline-danger">Exportar</button>
+                </div>
             </fieldset>
         </main>
-            
+
     </ui:composition>
 </html>
 

@@ -5,60 +5,63 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>  
-        
+
         <main>
             <fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%">
-                
-                
-                        <div class="table" style=" overflow: scroll;height: 300px">
-                            <table border="1">
-                              
-                                    <tr>
-                                        <th>Nit</th>
 
-                                        <th>Nombre emp</th>            
 
-                                        <th>Producto</th>
+                <div class="table" style=" overflow: scroll;height: 300px">
+                    <table border="1" id="provedo">
 
-                                        <th>Número cedula</th>
+                        <tr>
+                            <th>Nit</th>
 
-                                        <th>Nombre Proveedor</th>
-                                        
-                                        <th>Modificar</th>
-                                        
-                                        <th>Eliminar</th>
-                                        
-                                        
-                                    </tr>
-                                <h:form>
-                                    <c:forEach var="prov" items="#{proveedorSession.leerTodo()}">
-                                        <tr>
-                                            <td>#{prov.nit}</td>
+                            <th>Nombre emp</th>            
 
-                                            <td>#{prov.nombreEmpresa}</td>
+                            <th>Producto</th>
 
-                                            <td>#{prov.producto}</td>
+                            <th>Número cedula</th>
 
-                                            <td>#{prov.numeroCedula}</td>
+                            <th>Nombre Proveedor</th>
 
-                                            <td>#{prov.nombreProveedor}</td>
-                                            
-                                            <td><h:commandButton action="#{proveedorSession.cargaProveedor(prov)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
-                                
-                                            <td><h:commandButton action="#{proveedorSession.removerProveedor(prov)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
-                                        </tr>
-                                    </c:forEach>
-                               </h:form>
-                            </table>
+                            <th>Modificar</th>
 
-                        </div>
-                <a href="#{request.contextPath}/administrador/inventario_proveedores-agregar.xhtml" style="margin-left: 87%;">
-                        <input type="reset" value="Agregar" class="btn btn-secondary"/>
+                            <th>Eliminar</th>
+
+
+                        </tr>
+                        <h:form>
+                            <c:forEach var="prov" items="#{proveedorSession.leerTodo()}">
+                                <tr>
+                                    <td>#{prov.nit}</td>
+
+                                    <td>#{prov.nombreEmpresa}</td>
+
+                                    <td>#{prov.producto}</td>
+
+                                    <td>#{prov.numeroCedula}</td>
+
+                                    <td>#{prov.nombreProveedor}</td>
+
+                                    <td><h:commandButton action="#{proveedorSession.cargaProveedor(prov)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
+
+                                    <td><h:commandButton action="#{proveedorSession.removerProveedor(prov)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
+                                </tr>
+                            </c:forEach>
+                        </h:form>
+                    </table>
+
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic example" style="margin-left: 78%">
+                    <a href="#{request.contextPath}/administrador/inventario_proveedores-agregar.xhtml">
+                        <button  type="button" class="btn btn-outline-danger">Agregar</button>
                     </a>
+                    <button onclick="ExportToExcel('provedo')" type="button" class="btn btn-outline-danger">Exportar</button>
+                </div>
 
-                    </fieldset>
+            </fieldset>
         </main>
-               
+
     </ui:composition>
 </html>
 

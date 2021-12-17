@@ -13,7 +13,9 @@ import edu.sena.facade.ohana.VentasFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import org.primefaces.PrimeFaces;
 
@@ -27,11 +29,19 @@ import org.primefaces.PrimeFaces;
 public class ventasSession implements Serializable {
 @EJB
 VentasFacadeLocal ventasFacadeLocal;
+@EJB
 EstadodeenviosFacadeLocal estadodeenviosFacadeLocal;
-    /**
-     * Creates a new instance of ventasSession
-     */
+
+private int idEstadoEnvio;
+
+private ArrayList<Estadodeenvios> ListaEstadoEnvio = new ArrayList<>();
+    
     public ventasSession() {
+    }
+    
+    @PostConstruct
+    public void init(){
+        ListaEstadoEnvio.addAll(estadodeenviosFacadeLocal.findAll());
     }
     
     public List<Ventas> leerTodo(){
@@ -60,5 +70,21 @@ EstadodeenviosFacadeLocal estadodeenviosFacadeLocal;
                     + "'Error'"
                     + ")");
         }
+    }
+
+    public int getIdEstadoEnvio() {
+        return idEstadoEnvio;
+    }
+
+    public void setIdEstadoEnvio(int idEstadoEnvio) {
+        this.idEstadoEnvio = idEstadoEnvio;
+    }
+
+    public ArrayList<Estadodeenvios> getListaEstadoEnvio() {
+        return ListaEstadoEnvio;
+    }
+
+    public void setListaEstadoEnvio(ArrayList<Estadodeenvios> ListaEstadoEnvio) {
+        this.ListaEstadoEnvio = ListaEstadoEnvio;
     }
 }

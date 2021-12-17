@@ -29,6 +29,41 @@ public class PersonasFacade extends AbstractFacade<Personas> implements Personas
     public PersonasFacade() {
         super(Personas.class);
     }
+    
+        @Override
+    public boolean crearCliente(Personas perCre) {
+        try {
+            Query cli = em.createNativeQuery("INSERT INTO personas (numeroCedula,primerNombre,segundoNombre,primerApellido,segundoApellido,correo,numeroCelular,fechaDeNacimiento,contrasenia) VALUES (?,?,?,?,?,?,?,?,?);");
+            cli.setParameter(1, perCre.getNumeroCedula());
+            cli.setParameter(2, perCre.getPrimerNombre());
+            cli.setParameter(3, perCre.getSegundoNombre());
+            cli.setParameter(4, perCre.getPrimerApellido());
+            cli.setParameter(5, perCre.getSegundoApellido());
+            cli.setParameter(6, perCre.getCorreo());
+            cli.setParameter(7, perCre.getNumeroCelular());
+            cli.setParameter(8, perCre.getFechaDeNacimiento());
+            cli.setParameter(9, perCre.getContrasenia());
+            cli.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+    
+    @Override
+        public boolean agregarCliente(Personas perCre) {
+        try {
+            Query cli = em.createNativeQuery("INSERT INTO Clientes (numeroCedula,estados) VALUES (?,?);");
+            cli.setParameter(1, perCre.getNumeroCedula());
+            cli.setParameter(2, 1);
+            cli.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
 
     @Override
     public Personas inicioSesion(String correoIn, String contraseniaIn) {

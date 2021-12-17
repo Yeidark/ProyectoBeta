@@ -40,37 +40,21 @@ public class ClienteSession implements Serializable {
     public List<Clientes> leerTodo() {
         return clientesFacadeLocal.leerTodo();
     }
-
-    public void crearCliente() {
-        if (clientesFacadeLocal.crearCliente(crecli)) {
-            PrimeFaces.current().executeScript("Swal.fire("
-                    + "'Usuario',"
-                    + "'Registrado con exito !!!'"
-                    + "'Success'"
-                    + ")");
-        } else {
-            PrimeFaces.current().executeScript("Swal.fire("
-                    + "'Usuario',"
-                    + "'No se pudo registrar , intente de nuevo'"
-                    + "'Error'"
-                    + ")");
-        }
-
-    }
     
     public void actualizarDatos(){
         try {
             clientesFacadeLocal.edit(logcli);
             PrimeFaces.current().executeScript("Swal.fire("
-                    + "'Usuario',"
-                    + "'Actualizado con exito !!!'"
-                    + "'Success'"
+                    + " 'Usuario',"
+                    + " 'Actualizado con exito', "
+                    + " 'success'"
                     + ")");
+            
         } catch (Exception e) {
             PrimeFaces.current().executeScript("Swal.fire("
-                    + "'Usuario',"
-                    + "'No se pudo actualizar, intente de nuevo'"
-                    + "'Error'"
+                    + " 'Usuario',"
+                    + " 'No se pudo Actualizar', "
+                    + " 'error'"
                     + ")");
         }
     }
@@ -84,7 +68,7 @@ public class ClienteSession implements Serializable {
             }else{
                 PrimeFaces.current().executeScript("Swal.fire("
                                           + " 'Usuario',"
-                                          + " 'No existe en la nase de datos', "
+                                          + " 'No existe en la base de datos', "
                                           + " 'error'"
                                           +  ")");
             }
@@ -101,9 +85,9 @@ public class ClienteSession implements Serializable {
             }
             clientesFacadeLocal.edit(cliE);
             PrimeFaces.current().executeScript("Swal.fire("
-                    + "'Usuario',"
-                    + "'Actualizado con exito !!!'"
-                    + "'Error'"
+                    + " 'Estado cliente',"
+                    + " 'Actualizado con exito', "
+                    + " 'success'"
                     + ")");
         } catch (Exception e) {
             PrimeFaces.current().executeScript("Swal.fire("
