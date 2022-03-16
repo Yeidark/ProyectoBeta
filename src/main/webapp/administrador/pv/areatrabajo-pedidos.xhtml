@@ -5,57 +5,67 @@
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition>  
 
         <legend style="font-family: fantasy;font-size: 200%; margin-left: 44%">Pedidos</legend>
-        <div style=" overflow: scroll;height: 300px">
-            <table id="pedid">
-                <tr> 
-                    <th>Fecha</th>
-                    <th>Codigo</th> 
-                    <th>Producto</th> 
-                    <th>Cantidad</th> 
-                    <th>Medio de pago</th>
-                    <th>Direccion</th>
-                    <th>Estado</th>
-                    <th>Cambiar Estado</th>
+        <h:form>
+            <main style="overflow: scroll; height:300px;">
+                <p:dataTable id="pedid" var="ped" value="#{ventasSession.leerTodo()}" >
 
-                </tr>
-                <h:form>
-                    <c:forEach var="ped" items="#{ventasSession.leerTodo()}">
-                        <tr>
-                            <td><h:outputText value="#{ped.fechaVenta}">
-                                    <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
-                                </h:outputText></td>
-                            <td>#{ped.numeroDeCompra}</td>
-                            <td>#{ped.idProducto.idTipoProducto.nombreProducto}</td>
-                            <td>#{ped.cantidadProducto}</td>
-                            <td>#{ped.idMediosDePago.medioDePago}</td>
-                            <td>#{ped.idCliente.personas.tipoDeVia} #{ped.idCliente.personas.numeroVia}#{ped.idCliente.personas.letraVia} #{ped.idCliente.personas.numero} #{ped.idCliente.personas.letra} #{ped.idCliente.personas.numeroApto}</td>
-                            <td align="center">
-                                <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 1 }">
-                                    <button type="button" class="btn btn-primary">En Proceso</button>
-                                </c:if>
-                                <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 2}">
-                                    <button type="button" class="btn btn-warning">Enviado</button>
-                                </c:if>
-                                <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 3}">
-                                    <button type="button" class="btn btn-success">Entregado</button>
-                                </c:if>
-                                <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 4}">
-                                    <button type="button" class="btn btn-danger">Cancelado</button>
-                                </c:if>                        
-                            </td>
-                            <td><h:commandButton action="#{ventasSession.cambiarEstado(ped)}" class="btn btn-outline-danger" value="Cambiar"></h:commandButton></td>
-                        </tr>
-                    </c:forEach>
-                </h:form>
-            </table> 
-        </div>
-        <p><div align="center">
-                <h:commandButton onclick="ExportToExcel('pedid')" class="btn btn-outline-danger" value="Exportar" style=""></h:commandButton> 
-            </div></p>
+                    <p:column  headerText="Fecha" filterBy="#{ped.fechaVenta}" filterMatchMode="contains">
+                        <h:outputText value="#{ped.fechaVenta}">
+                            <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Código" filterBy="#{ped.numeroDeCompra}" filterMatchMode="contains">
+                        <h:outputText value="#{ped.numeroDeCompra}"/>
+                    </p:column>
+                    <p:column  headerText="Producto" filterBy="#{ped.idProducto.idTipoProducto.nombreProducto}" filterMatchMode="contains">
+                        <h:outputText value="#{ped.idProducto.idTipoProducto.nombreProducto}"/>
+                    </p:column>
+                    <p:column  headerText="Cantidad" filterBy="#{ped.cantidadProducto}" filterMatchMode="contains">
+                        <h:outputText value="#{ped.cantidadProducto}"/>
+                    </p:column>
+                    <p:column  headerText="Medio de pago" filterBy="#{ped.idMediosDePago.medioDePago}" filterMatchMode="contains">
+                        <h:outputText value="#{ped.idMediosDePago.medioDePago}"/>
+                    </p:column>
+                    <p:column headerText="Dirección" filterBy="#{ped.idCliente.personas.tipoDeVia} #{ped.idCliente.personas.numeroVia}#{ped.idCliente.personas.letraVia} #{ped.idCliente.personas.numero} #{ped.idCliente.personas.letra} #{ped.idCliente.personas.numeroApto}" filterMatchMode="contains">
+                        <h:outputText value="#{ped.idCliente.personas.tipoDeVia} #{ped.idCliente.personas.numeroVia}#{ped.idCliente.personas.letraVia} #{ped.idCliente.personas.numero} #{ped.idCliente.personas.letra} #{ped.idCliente.personas.numeroApto}"/>
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 1 }">
+                            <h:commandButton  type="button" class="btn btn-primary">En Proceso</h:commandButton>
+                        </c:if>
+                        <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 2}">
+                            <h:commandButton  type="button" class="btn btn-warning">Enviado</h:commandButton>
+                        </c:if>
+                        <c:if test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 3}">
+                            <h:commandButton type="button" class="btn btn-success">Entregado</h:commandButton>
+                        </c:if>
+                        <c:if  test="#{ped.idEstadoDeEnvios.idEstadoDeEnvios == 4}">
+                            <h:commandButton  type="button" class="btn btn-danger">Cancelado</h:commandButton>
+                        </c:if>  
+                    </p:column>
+                    <p:column  headerText="Cambiar estado">
+                        <h:commandButton action="#{ventasSession.cambiarEstado(ped)}" class="btn btn-outline-danger" value="Cambiar"></h:commandButton>
+                    </p:column>
+                </p:dataTable>
+
+            </main>
+            <div align="center">
+                <h:commandLink style="margin-right: 2%">
+                    <h:graphicImage url="../assets/img/Excel.jpg" width="50px" height="70px"/>
+                    <p:dataExporter type="xls" target="pedid" fileName="PedidosExcel"/>
+                </h:commandLink>
+
+                <h:commandLink>
+                    <h:graphicImage url="../assets/img/pdf.png" width="50px" height="70px"/>
+                    <p:dataExporter type="pdf" target="pedid" fileName="Pedidospdf"/>
+                </h:commandLink>
+            </div>
+        </h:form> 
 
     </ui:composition>
 </html>

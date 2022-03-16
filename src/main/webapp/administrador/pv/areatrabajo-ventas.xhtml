@@ -5,55 +5,50 @@
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition>  
-        <h:form>
-            
+        
             <legend style="font-family: fantasy;font-size: 200%; margin-left: 41%">Ventas Realizadas</legend>
-                <div style=" overflow: scroll;height: 300px;" >
-                    <table id="vent" border="1">
-                        <tr>
-                            <th>Id</th>
-                            <th>Fecha</th>
-                            <th>Productos Vendidos</th>
-                            <th>Total</th>
+            
+        <h:form>
+            <main style="overflow: scroll; height:300px;">
+                <p:dataTable id="vent" var="ven" value="#{ventasSession.leerTodo()}" >
+                    
+                    <p:column  headerText="Id" filterBy="#{ven.idVentas}" filterMatchMode="contains">
+                        <h:outputText value="#{ven.idVentas}"/>
+                    </p:column>
+                    <p:column headerText="Fecha" filterBy="#{ven.fechaVenta}" filterMatchMode="contains">
+                        <h:outputText value="#{ven.fechaVenta}">
+                            <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+                        </h:outputText> 
+                    </p:column>
+                        <p:column  headerText="Código" filterBy="#{ven.idProducto.idProducto}" filterMatchMode="contains">
+                        <h:outputText value="#{ven.idProducto.idProducto}"/>
+                        </p:column>
+                        <p:column  headerText="Descripción" filterBy="#{ven.idProducto.idTipoProducto.nombreProducto}" filterMatchMode="contains">
+                        <h:outputText value="#{ven.idProducto.idTipoProducto.nombreProducto}"/>
+                        </p:column>
+                        <p:column  headerText="Cantidad" filterBy="#{ven.cantidadProducto}" filterMatchMode="contains">
+                        <h:outputText value="#{ven.cantidadProducto}"/>
+                        </p:column>
+                    <p:column headerText="Valor total" filterBy="#{ven.valorTotal}" filterMatchMode="contains">
+                        <h:outputText value="#{ven.valorTotal}"/>
+                    </p:column>
+                </p:dataTable>
 
-                        </tr>
-                        <c:forEach var="ven" items="#{ventasSession.leerTodo()}">
-                            <tr>
+            </main>
+            <div align="center">
+                <h:commandLink style="margin-right: 2%">
+                    <h:graphicImage url="../assets/img/Excel.jpg" width="50px" height="70px"/>
+                    <p:dataExporter type="xls" target="vent" fileName="VentasExcel"/>
+                </h:commandLink>
 
-                                <td>#{ven.idVentas}</td>
-                                <td><h:outputText value="#{ven.fechaVenta}">
-                                        <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
-                                    </h:outputText> </td>
-
-                                <td><table>
-
-                                        <tr>
-                                            <th>Codigo</th>
-                                            <th>Descrpcion</th>
-                                            <th>Cantidad</th>
-                                        </tr>
-                                        <tr>
-                                            <td>#{ven.idProducto.idProducto}</td>
-                                            <td>#{ven.idProducto.idTipoProducto.nombreProducto}</td>
-                                            <td>#{ven.cantidadProducto}</td>
-                                        </tr>
-
-                                    </table>
-                                </td> 
-                                <td>#{ven.valorTotal}</td>
-
-
-                            </tr>
-                        </c:forEach> 
-                    </table>
-                </div>
-
-                <p><div align="center">
-                        <h:commandButton onclick="ExportToExcel('vent')" class="btn btn-outline-danger" value="Exportar" style=""></h:commandButton> 
-                </div></p>
-      
-        </h:form>
+                <h:commandLink>
+                    <h:graphicImage url="../assets/img/pdf.png" width="50px" height="70px"/>
+                    <p:dataExporter type="pdf" target="vent" fileName="Ventaspdf"/>
+                </h:commandLink>
+            </div>
+        </h:form>  
     </ui:composition>
 </html>

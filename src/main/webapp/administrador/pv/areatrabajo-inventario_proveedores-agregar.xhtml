@@ -8,12 +8,17 @@
         <main>  
                 <section class="form-registro" style="width: 60%; margin-left: 40%; margin-right: 10%; margin-bottom: 3%">
                     <h:form>
+                        <h:message style="color: red" for="nit"></h:message><br/>
+                        <h:message style="color: red" for="nombreEmpresa"></h:message><br/>
+                        <h:message style="color: red" for="producto"></h:message><br/>
+                        <h:message style="color: red" for="numeroCedula"></h:message><br/>
+                        <h:message style="color: red" for="nombreProveedor"></h:message>
                         <h4 align="center" style="font-family: fantasy">Agregar Proveedor</h4>
-                        <h:inputText value="#{proveedorSession.provagr.nit}" class="controls" id="nit" html5:placeholder="nit" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText value="#{proveedorSession.provagr.nombreEmpresa}" class="controls" id="nombreEmpresa" html5:placeholder="nombreEmpresa" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText value="#{proveedorSession.provagr.producto}" class="controls" id="producto" html5:placeholder="producto" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText value="#{proveedorSession.provagr.numeroCedula}" class="controls" id="numeroCedula" html5:placeholder="numeroCedula" required="" style="margin-right: 25px; width: 40%"/>
-                        <h:inputText value="#{proveedorSession.provagr.nombreProveedor}" class="controls" id="nombreProveedor" html5:placeholder="nombreProveedor" required="" style="margin-right: 25%; width: 40%"/>
+                        <h:inputText value="#{proveedorSession.provagr.nit}" class="controls" id="nit" html5:placeholder="nit" required="true" requiredMessage="Digite un nit valido" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText value="#{proveedorSession.provagr.nombreEmpresa}" class="controls" id="nombreEmpresa" html5:placeholder="nombreEmpresa" required="true" requiredMessage="Digite un el nombre de la empresa" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText value="#{proveedorSession.provagr.producto}" class="controls" id="producto" html5:placeholder="producto" required="true" requiredMessage="Digite un producto valido" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText value="#{proveedorSession.provagr.numeroCedula}" class="controls" id="numeroCedula" html5:placeholder="numeroCedula" required="true" requiredMessage="Digite un numero de cedula valido" style="margin-right: 25px; width: 40%"/>
+                        <h:inputText value="#{proveedorSession.provagr.nombreProveedor}" class="controls" id="nombreProveedor" html5:placeholder="nombreProveedor" required="true" requiredMessage="Digite un proveedor valido" style="margin-right: 25%; width: 40%"/>
                         <h:commandButton class="botons" action="#{proveedorSession.agregarProveedor()}" value="Agregar"/>
 
                     </h:form>

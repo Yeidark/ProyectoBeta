@@ -6,7 +6,7 @@
         <property name="portNumber" value="3306"/>
         <property name="databaseName" value="ohana"/>
         <property name="User" value="root"/>
-        <property name="Password" value="Daveli20."/>
+        <property name="Password" value="root"/>
         <property name="URL" value="jdbc:mysql://localhost:3306/ohana?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
     </jdbc-connection-pool>

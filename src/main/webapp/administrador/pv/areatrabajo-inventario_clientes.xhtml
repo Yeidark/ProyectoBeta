@@ -5,61 +5,67 @@
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition>  
         <legend style="font-family: fantasy; font-size: 200%; margin-left: 45%">Clientes</legend>
-        <main style="overflow: scroll; height:300px;">
-            <table id="Clientes" border="1px">
+        <h:form>
+            <main style="overflow: scroll; height:300px;">
+                <p:dataTable id="Clientes" var="cli" value="#{clienteSession.leerTodo()}"  class="table">
 
-                <tr align="center"> 
-                    <th>IdCliente</th>
-                    <th>Primer nombre</th> 
-                    <th>Segundo nombre</th> 
-                    <th>Primer apellido</th> 
-                    <th>Segundo apellido</th>
-                    <th>Correo</th>
-                    <th>Numero celular</th>
-                    <th>Dirección</th>
-                    <th>Fecha de nacimiento</th>
-                    <th>Estado</th>
-                    <th>Cambiar estado</th>
-                </tr>
-                <h:form>
-                    <c:forEach var="cli" items="#{clienteSession.leerTodo()}">
-                        <tr>
-                            <td>#{cli.idClientes}</td>
-                            <td>#{cli.personas.primerNombre}</td>
-                            <td>#{cli.personas.segundoNombre}</td>
-                            <td>#{cli.personas.primerApellido}</td>
-                            <td>#{cli.personas.segundoApellido}</td>
-                            <td>#{cli.personas.correo}</td>
-                            <td>#{cli.personas.numeroCelular}</td>
-                            <td>#{cli.personas.tipoDeVia} #{cli.personas.numeroVia}#{cli.personas.letraVia} #{cli.personas.numero} #{cli.personas.letra} #{cli.personas.numeroApto}</td>
-                            <td><h:outputText value="#{cli.personas.fechaDeNacimiento}">
-                                    <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
-                                </h:outputText></td>
-                            <td>
-                                <c:if test="#{cli.estados == 1}">
-                                    <button type="button" class="btn btn-success">A</button>
-                                </c:if>
-                                <c:if test="#{cli.estados == 0}">
-                                    <button type="button" class="btn btn-warning">I</button>
-                                </c:if>
+                    <p:column headerText="Id cliente" filterBy="#{cli.idClientes}" filterMatchMode="contains">
+                        <h:outputText value="#{cli.idClientes}"/>
+                    </p:column>
+                    <p:column width="100px" headerText="Primer nombre" filterBy="#{cli.personas.primerNombre}" filterMatchMode="contains">
+                        <h:outputText value="#{cli.personas.primerNombre}"/>
+                    </p:column>
+                    <p:column headerText="Segundo nombre" filterBy="#{cli.personas.segundoNombre}" filterMatchMode="contains">
+                        <h:outputText value="#{cli.personas.segundoNombre}"/>
+                    </p:column>
+                    <p:column headerText="Primer apellido" filterBy="#{cli.personas.primerApellido}" filterMatchMode="contains">
+                        <h:outputText value="#{cli.personas.primerApellido}"/>
+                    </p:column>
+                    <p:column headerText="Segundo apellido" filterBy="#{cli.personas.segundoApellido}" filterMatchMode="contains">
+                        <h:outputText value="#{cli.personas.segundoApellido}"/>
+                    </p:column>
+                    <p:column headerText="Correo" filterBy="#{cli.personas.correo}" filterMatchMode="contains">
+                        <h:outputText value="#{cli.personas.correo}"/>
+                    </p:column>
+                    <p:column headerText="Número celular" filterBy="#{cli.personas.numeroCelular}" filterMatchMode="contains">
+                        <h:outputText value="#{cli.personas.numeroCelular}"/>
+                    </p:column>
+                    <p:column headerText="Dirección" filterBy="#{cli.personas.tipoDeVia} #{cli.personas.numeroVia}#{cli.personas.letraVia} #{cli.personas.numero} #{cli.personas.letra} #{cli.personas.numeroApto}" filterMatchMode="contains">
+                        <h:outputText value="#{cli.personas.tipoDeVia} #{cli.personas.numeroVia}#{cli.personas.letraVia} #{cli.personas.numero} #{cli.personas.letra} #{cli.personas.numeroApto}"/>
+                    </p:column>
+                    <p:column width="100px" headerText="Fecha nacimiento" filterBy="#{cli.personas.fechaDeNacimiento}" filterOptions="true" filterMatchMode="contains">
+                        <h:outputText value="#{cli.personas.fechaDeNacimiento}"><f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime></h:outputText>
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <c:if test="#{cli.estados == 1}">
+                            <h:commandButton class="btn btn-success" value="A"></h:commandButton>
+                        </c:if>
+                        <c:if test="#{cli.estados == 0}">
+                            <h:commandButton class="btn btn-warning" value="I"></h:commandButton>
+                        </c:if>
+                    </p:column>
+                    <p:column width="80px" headerText="Cambiar estado" exportable="false">
+                        <h:commandButton action="#{clienteSession.cambiarEstado(cli)}" class="btn btn-outline-danger" value="Cambiar"></h:commandButton>
+                    </p:column>
+                </p:dataTable>
 
-                            </td>
-                            <td><h:commandButton action="#{clienteSession.cambiarEstado(cli)}" class="btn btn-outline-danger" value="Cambiar"></h:commandButton></td>
-                        </tr>
+            </main>
+            <div align="center">
+                <h:commandLink style="margin-right: 2%">
+                    <h:graphicImage url="../assets/img/Excel.jpg" width="50px" height="70px"/>
+                    <p:dataExporter type="xls" target="Clientes" fileName="ClientesExcel"/>
+                </h:commandLink>
 
-                    </c:forEach>
-
-                </h:form>
-
-            </table>
-            
-        </main>
-        <p><div align="center">
-                        <h:commandButton onclick="ExportToExcel('vent')" class="btn btn-outline-danger" value="Exportar" style=""></h:commandButton> 
-                </div></p>
+                <h:commandLink>
+                    <h:graphicImage url="../assets/img/pdf.png" width="50px" height="70px"/>
+                    <p:dataExporter type="pdf" target="Clientes" fileName="Clientespdf"/>
+                </h:commandLink>
+            </div>
+        </h:form>  
     </ui:composition>
 </html>
 
