@@ -6,8 +6,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition>  
-                <main>
-                    <p:fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%" toggleable="true">
+        <main>
+            <p:fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%" toggleable="true">
 
                 <h:form>
                     <p:dataTable id="provedo" var="prov" value="#{proveedorSession.leerTodo()}"  class="table" style=" overflow: scroll;height: 300px">
@@ -41,21 +41,22 @@
 
 
                     <div class="btn-group" role="group" aria-label="Basic example" style="margin-left: 78%">
-                        <a href="#{request.contextPath}/administrador/inventario_agregarproductos.xhtml" >
+                        <a href="#{request.contextPath}/administrador/inventario_proveedores-agregar.xhtml" >
                             <button  type="button" class="btn btn-outline-danger">Agregar</button>
                         </a>
                     </div>
+
                     <div align="center">
                         <h:commandLink style="margin-right: 2%">
                             <h:graphicImage url="../assets/img/Excel.jpg" width="50px" height="70px"/>
                             <p:dataExporter type="xls" target="provedo" fileName="categoriaExcel"/>
                         </h:commandLink>
-                        
+
                         <h:commandLink>
                             <h:graphicImage url="../assets/img/pdf.png" width="50px" height="70px"/>
                             <p:dataExporter type="pdf" target="provedo" fileName="categoriapdf"/>
                         </h:commandLink>
-                   </div>
+                    </div>
                 </h:form>  
 
             </p:fieldset>
