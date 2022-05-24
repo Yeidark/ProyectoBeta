@@ -40,6 +40,7 @@
                     <p:column width="100px" headerText="Fecha nacimiento" filterBy="#{cli.personas.fechaDeNacimiento}" filterOptions="true" filterMatchMode="contains">
                         <h:outputText value="#{cli.personas.fechaDeNacimiento}"><f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime></h:outputText>
                     </p:column>
+                    
                     <p:column headerText="Estado">
                         <c:if test="#{cli.estados == 1}">
                             <h:commandButton class="btn btn-success" value="A"></h:commandButton>
@@ -48,6 +49,7 @@
                             <h:commandButton class="btn btn-warning" value="I"></h:commandButton>
                         </c:if>
                     </p:column>
+                        
                     <p:column width="80px" headerText="Cambiar estado" exportable="false">
                         <h:commandButton action="#{clienteSession.cambiarEstado(cli)}" class="btn btn-outline-danger" value="Cambiar"></h:commandButton>
                     </p:column>
