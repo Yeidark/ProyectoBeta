@@ -110,6 +110,15 @@ z-index: 10;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 30px;
 }
+
+.col-sm-4{
+  max-width: 100%;
+  display: block;
+   z-index: -10;
+}
+.col-sm-4:hover{
+    transform: scale(1.05);
+}
 .redes{
   display: flex;
   padding: 10%;

@@ -25,6 +25,14 @@
         <servlet-name>controladorImg</servlet-name>
         <servlet-class>com.alexander.controlador.controladorImg</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductoG</servlet-name>
+        <servlet-class>edu.sena.controller.ohana.ProductoG</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>controladorG</servlet-name>
+        <servlet-class>edu.sena.controller.ohana.controladorG</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
@@ -44,6 +52,14 @@
     <servlet-mapping>
         <servlet-name>controladorImg</servlet-name>
         <url-pattern>/controladorImg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductoG</servlet-name>
+        <url-pattern>/ProductoG</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>controladorG</servlet-name>
+        <url-pattern>/controladorG</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
