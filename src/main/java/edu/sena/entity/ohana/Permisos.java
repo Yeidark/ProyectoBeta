@@ -20,15 +20,20 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "permisos")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Permisos.findAll", query = "SELECT p FROM Permisos p")})
+    @NamedQuery(name = "Permisos.findAll", query = "SELECT p FROM Permisos p"),
+    @NamedQuery(name = "Permisos.findByIdPermisos", query = "SELECT p FROM Permisos p WHERE p.idPermisos = :idPermisos"),
+    @NamedQuery(name = "Permisos.findByDescripcion", query = "SELECT p FROM Permisos p WHERE p.descripcion = :descripcion")})
 public class Permisos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,6 +74,7 @@ public class Permisos implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @XmlTransient
     public Collection<Roles> getRolesCollection() {
         return rolesCollection;
     }
@@ -99,7 +105,7 @@ public class Permisos implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Permisos[ idPermisos=" + idPermisos + " ]";
+        return "edu.sena.ohana.Permisos[ idPermisos=" + idPermisos + " ]";
     }
     
 }

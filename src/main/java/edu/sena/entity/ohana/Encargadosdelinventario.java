@@ -19,15 +19,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "encargadosdelinventario")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Encargadosdelinventario.findAll", query = "SELECT e FROM Encargadosdelinventario e")})
+    @NamedQuery(name = "Encargadosdelinventario.findAll", query = "SELECT e FROM Encargadosdelinventario e"),
+    @NamedQuery(name = "Encargadosdelinventario.findByIdEncargadoDelInventario", query = "SELECT e FROM Encargadosdelinventario e WHERE e.idEncargadoDelInventario = :idEncargadoDelInventario")})
 public class Encargadosdelinventario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -87,7 +90,7 @@ public class Encargadosdelinventario implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Encargadosdelinventario[ idEncargadoDelInventario=" + idEncargadoDelInventario + " ]";
+        return "edu.sena.ohana.Encargadosdelinventario[ idEncargadoDelInventario=" + idEncargadoDelInventario + " ]";
     }
     
 }

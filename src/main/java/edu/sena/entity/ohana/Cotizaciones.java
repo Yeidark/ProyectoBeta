@@ -17,15 +17,19 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "cotizaciones")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cotizaciones.findAll", query = "SELECT c FROM Cotizaciones c")})
+    @NamedQuery(name = "Cotizaciones.findAll", query = "SELECT c FROM Cotizaciones c"),
+    @NamedQuery(name = "Cotizaciones.findByIdCotizacion", query = "SELECT c FROM Cotizaciones c WHERE c.idCotizacion = :idCotizacion"),
+    @NamedQuery(name = "Cotizaciones.findByIdProducto", query = "SELECT c FROM Cotizaciones c WHERE c.idProducto = :idProducto")})
 public class Cotizaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -93,7 +97,7 @@ public class Cotizaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Cotizaciones[ idCotizacion=" + idCotizacion + " ]";
+        return "edu.sena.ohana.Cotizaciones[ idCotizacion=" + idCotizacion + " ]";
     }
     
 }

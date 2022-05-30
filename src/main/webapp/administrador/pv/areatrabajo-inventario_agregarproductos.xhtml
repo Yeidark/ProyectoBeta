@@ -16,34 +16,15 @@
 
                     <h:inputText required="true" requiredMessage="Ingresar el tipo del producto" value="#{productoSession.idTipoProducto}" class="controls" id="TipoProducto" html5:placeholder="TipoProducto" style="width: 40%; margin-right: 7%"></h:inputText>
                     
-                    <h:selectOneMenu value="#{productoSession.prodagr.talla}" class="controls" style="width: 40%; margin-right: 8%" id="talla" html5:placeholder="talla">
-                        <f:selectItem noSelectionOption="Talla"></f:selectItem>
-                        <f:selectItem itemLabel="XS" itemValue="XS"></f:selectItem>
-                        <f:selectItem itemLabel="S" itemValue="S"></f:selectItem>
-                        <f:selectItem itemLabel="M" itemValue="M"></f:selectItem>
-                        <f:selectItem itemLabel="L" itemValue="L"></f:selectItem>
-                    </h:selectOneMenu>
+                    <h:inputText required="true" value="#{productoSession.prodagr.nombres}" class="controls" style="width: 40%; margin-right: 8%" id="Nombre" html5:placeholder="Nombre"></h:inputText>
                     
-                    <h:outputLabel for="tamanio" style="margin-right: 82%; font-family: fantasy;font-size: 140%;position: relative">Tamaño</h:outputLabel>
-                    <h:outputLabel for="color" style="margin-right: 40%; font-family: fantasy;font-size: 140%;position: absolute; right: -135px ">Color</h:outputLabel><br/>
-                    <h:selectOneMenu value="#{productoSession.prodagr.tamanio}" class="controls" style="width: 40%;margin-right: 7%"  id="tamanio" html5:placeholder="tamaño">
-                        <f:selectItem noSelectionOption="Tamaño"></f:selectItem>
-                        <f:selectItem itemLabel="Pequeño" itemValue="Pequeño"></f:selectItem>
-                        <f:selectItem itemLabel="Mediano" itemValue="Mediano"></f:selectItem>
-                        <f:selectItem itemLabel="Grande" itemValue="Grande"></f:selectItem>
-                    </h:selectOneMenu>
-                    <h:selectOneMenu required="true" requiredMessage="Ingresar el color producto" value="#{productoSession.prodagr.color}" class="controls" style="width: 40%; margin-right: 8%" id="color" html5:placeholder="color">
-                        
-                        <f:selectItem noSelectionOption="Color"></f:selectItem>
-                        <f:selectItem itemLabel="Blanco" itemValue="Blanco"></f:selectItem>
-                        <f:selectItem itemLabel="Negro" itemValue="Negro"></f:selectItem>
-                        <f:selectItem itemLabel="Azul" itemValue="Azul"></f:selectItem>
-                        <f:selectItem itemLabel="Amarillo" itemValue="Amarillo"></f:selectItem>
-                        <f:selectItem itemLabel="Gris" itemValue="Gris"></f:selectItem>
-                        <f:selectItem itemLabel="Rojo" itemValue="Rojo"></f:selectItem>
-                        <f:selectItem itemLabel="Rosado" itemValue="Rosado"></f:selectItem>
-                        <f:selectItem itemLabel="Verde" itemValue="Verde"></f:selectItem>
-                    </h:selectOneMenu> 
+                    <h:inputFile value="#{productoSession.prodagr.foto}" class="controls" style="width: 40%; margin-right: 8%" id="Foto" html5:placeholder="Foto"></h:inputFile>
+                    
+                    <h:inputText required="true" value="#{productoSession.prodagr.descripcion}" class="controls" style="width: 40%; margin-right: 8%" id="Descripcion" html5:placeholder="Descripcion"></h:inputText>
+                    
+                    <h:inputText required="true" value="#{productoSession.prodagr.precio}" class="controls" style="width: 40%; margin-right: 8%" id="Precio" html5:placeholder="Precio"></h:inputText>
+                    
+                    <h:inputText required="true" value="#{productoSession.prodagr.stock}" class="controls" style="width: 40%; margin-right: 8%" id="Stock" html5:placeholder="Stock"></h:inputText>
 
                     <h:commandButton class="botons" action="#{productoSession.agregarProducto()}" value="Agregar"/>
                 </h:form>
@@ -52,4 +33,3 @@
         </main>
     </ui:composition>
 </html>
-

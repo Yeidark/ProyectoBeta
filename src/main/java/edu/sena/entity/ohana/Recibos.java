@@ -17,15 +17,18 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "recibos")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Recibos.findAll", query = "SELECT r FROM Recibos r")})
+    @NamedQuery(name = "Recibos.findAll", query = "SELECT r FROM Recibos r"),
+    @NamedQuery(name = "Recibos.findByIdRecibos", query = "SELECT r FROM Recibos r WHERE r.idRecibos = :idRecibos")})
 public class Recibos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,7 +86,7 @@ public class Recibos implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Recibos[ idRecibos=" + idRecibos + " ]";
+        return "edu.sena.ohana.Recibos[ idRecibos=" + idRecibos + " ]";
     }
     
 }

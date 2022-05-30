@@ -19,15 +19,19 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "barrios")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Barrios.findAll", query = "SELECT b FROM Barrios b")})
+    @NamedQuery(name = "Barrios.findAll", query = "SELECT b FROM Barrios b"),
+    @NamedQuery(name = "Barrios.findByIdBarrio", query = "SELECT b FROM Barrios b WHERE b.idBarrio = :idBarrio"),
+    @NamedQuery(name = "Barrios.findByNombreBarrio", query = "SELECT b FROM Barrios b WHERE b.nombreBarrio = :nombreBarrio")})
 public class Barrios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -96,7 +100,7 @@ public class Barrios implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Barrios[ idBarrio=" + idBarrio + " ]";
+        return "edu.sena.ohana.Barrios[ idBarrio=" + idBarrio + " ]";
     }
     
 }

@@ -18,15 +18,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "estadodeenvios")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Estadodeenvios.findAll", query = "SELECT e FROM Estadodeenvios e")})
+    @NamedQuery(name = "Estadodeenvios.findAll", query = "SELECT e FROM Estadodeenvios e"),
+    @NamedQuery(name = "Estadodeenvios.findByIdEstadoDeEnvios", query = "SELECT e FROM Estadodeenvios e WHERE e.idEstadoDeEnvios = :idEstadoDeEnvios"),
+    @NamedQuery(name = "Estadodeenvios.findByEstadoDeEnvio", query = "SELECT e FROM Estadodeenvios e WHERE e.estadoDeEnvio = :estadoDeEnvio")})
 public class Estadodeenvios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +69,7 @@ public class Estadodeenvios implements Serializable {
         this.estadoDeEnvio = estadoDeEnvio;
     }
 
+    @XmlTransient
     public Collection<Ventas> getVentasCollection() {
         return ventasCollection;
     }
@@ -94,7 +100,7 @@ public class Estadodeenvios implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Estadodeenvios[ idEstadoDeEnvios=" + idEstadoDeEnvios + " ]";
+        return "edu.sena.ohana.Estadodeenvios[ idEstadoDeEnvios=" + idEstadoDeEnvios + " ]";
     }
     
 }

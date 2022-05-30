@@ -23,15 +23,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "ventas")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Ventas.findAll", query = "SELECT v FROM Ventas v")})
+    @NamedQuery(name = "Ventas.findAll", query = "SELECT v FROM Ventas v"),
+    @NamedQuery(name = "Ventas.findByIdVentas", query = "SELECT v FROM Ventas v WHERE v.idVentas = :idVentas"),
+    @NamedQuery(name = "Ventas.findByIdProducto", query = "SELECT v FROM Ventas v WHERE v.idProducto = :idProducto"),
+    @NamedQuery(name = "Ventas.findByCantidadProducto", query = "SELECT v FROM Ventas v WHERE v.cantidadProducto = :cantidadProducto"),
+    @NamedQuery(name = "Ventas.findByValorUnitario", query = "SELECT v FROM Ventas v WHERE v.valorUnitario = :valorUnitario"),
+    @NamedQuery(name = "Ventas.findByValorTotal", query = "SELECT v FROM Ventas v WHERE v.valorTotal = :valorTotal"),
+    @NamedQuery(name = "Ventas.findByFechaVenta", query = "SELECT v FROM Ventas v WHERE v.fechaVenta = :fechaVenta"),
+    @NamedQuery(name = "Ventas.findByNumeroDeCompra", query = "SELECT v FROM Ventas v WHERE v.numeroDeCompra = :numeroDeCompra")})
 public class Ventas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +50,8 @@ public class Ventas implements Serializable {
     @Basic(optional = false)
     @Column(name = "idVentas")
     private Integer idVentas;
+    @Column(name = "idProducto")
+    private Integer idProducto;
     @Column(name = "cantidadProducto")
     private Integer cantidadProducto;
     @Column(name = "valorUnitario")
@@ -65,9 +77,6 @@ public class Ventas implements Serializable {
     @JoinColumn(name = "idMediosDePago", referencedColumnName = "idMediosDePago")
     @ManyToOne(fetch = FetchType.LAZY)
     private Mediosdepago idMediosDePago;
-    @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Productos idProducto;
     @OneToMany(mappedBy = "idVentas", fetch = FetchType.LAZY)
     private Collection<Inventario> inventarioCollection;
 
@@ -84,6 +93,14 @@ public class Ventas implements Serializable {
 
     public void setIdVentas(Integer idVentas) {
         this.idVentas = idVentas;
+    }
+
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
     }
 
     public Integer getCantidadProducto() {
@@ -126,6 +143,7 @@ public class Ventas implements Serializable {
         this.numeroDeCompra = numeroDeCompra;
     }
 
+    @XmlTransient
     public Collection<Recibos> getRecibosCollection() {
         return recibosCollection;
     }
@@ -166,14 +184,7 @@ public class Ventas implements Serializable {
         this.idMediosDePago = idMediosDePago;
     }
 
-    public Productos getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(Productos idProducto) {
-        this.idProducto = idProducto;
-    }
-
+    @XmlTransient
     public Collection<Inventario> getInventarioCollection() {
         return inventarioCollection;
     }
@@ -204,7 +215,7 @@ public class Ventas implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Ventas[ idVentas=" + idVentas + " ]";
+        return "edu.sena.ohana.Ventas[ idVentas=" + idVentas + " ]";
     }
     
 }

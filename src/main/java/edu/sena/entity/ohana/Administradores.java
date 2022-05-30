@@ -19,15 +19,20 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "administradores")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Administradores.findAll", query = "SELECT a FROM Administradores a")})
+    @NamedQuery(name = "Administradores.findAll", query = "SELECT a FROM Administradores a"),
+    @NamedQuery(name = "Administradores.findByIdAdministrador", query = "SELECT a FROM Administradores a WHERE a.idAdministrador = :idAdministrador"),
+    @NamedQuery(name = "Administradores.findByNumeroCedula", query = "SELECT a FROM Administradores a WHERE a.numeroCedula = :numeroCedula")})
 public class Administradores implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +69,7 @@ public class Administradores implements Serializable {
         this.numeroCedula = numeroCedula;
     }
 
+    @XmlTransient
     public Collection<Ventas> getVentasCollection() {
         return ventasCollection;
     }
@@ -94,7 +100,7 @@ public class Administradores implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Administradores[ idAdministrador=" + idAdministrador + " ]";
+        return "edu.sena.ohana.Administradores[ idAdministrador=" + idAdministrador + " ]";
     }
     
 }

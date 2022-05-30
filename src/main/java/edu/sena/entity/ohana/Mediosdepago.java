@@ -18,15 +18,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "mediosdepago")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Mediosdepago.findAll", query = "SELECT m FROM Mediosdepago m")})
+    @NamedQuery(name = "Mediosdepago.findAll", query = "SELECT m FROM Mediosdepago m"),
+    @NamedQuery(name = "Mediosdepago.findByIdMediosDePago", query = "SELECT m FROM Mediosdepago m WHERE m.idMediosDePago = :idMediosDePago"),
+    @NamedQuery(name = "Mediosdepago.findByMedioDePago", query = "SELECT m FROM Mediosdepago m WHERE m.medioDePago = :medioDePago")})
 public class Mediosdepago implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +69,7 @@ public class Mediosdepago implements Serializable {
         this.medioDePago = medioDePago;
     }
 
+    @XmlTransient
     public Collection<Ventas> getVentasCollection() {
         return ventasCollection;
     }
@@ -94,7 +100,7 @@ public class Mediosdepago implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Mediosdepago[ idMediosDePago=" + idMediosDePago + " ]";
+        return "edu.sena.ohana.Mediosdepago[ idMediosDePago=" + idMediosDePago + " ]";
     }
     
 }

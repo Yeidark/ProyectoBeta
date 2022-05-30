@@ -21,15 +21,20 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "clientes")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Clientes.findAll", query = "SELECT c FROM Clientes c")})
+    @NamedQuery(name = "Clientes.findAll", query = "SELECT c FROM Clientes c"),
+    @NamedQuery(name = "Clientes.findByIdClientes", query = "SELECT c FROM Clientes c WHERE c.idClientes = :idClientes"),
+    @NamedQuery(name = "Clientes.findByEstados", query = "SELECT c FROM Clientes c WHERE c.estados = :estados")})
 public class Clientes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,6 +78,7 @@ public class Clientes implements Serializable {
         this.estados = estados;
     }
 
+    @XmlTransient
     public Collection<Cotizaciones> getCotizacionesCollection() {
         return cotizacionesCollection;
     }
@@ -81,6 +87,7 @@ public class Clientes implements Serializable {
         this.cotizacionesCollection = cotizacionesCollection;
     }
 
+    @XmlTransient
     public Collection<Ventas> getVentasCollection() {
         return ventasCollection;
     }
@@ -119,7 +126,7 @@ public class Clientes implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Clientes[ idClientes=" + idClientes + " ]";
+        return "edu.sena.ohana.Clientes[ idClientes=" + idClientes + " ]";
     }
     
 }

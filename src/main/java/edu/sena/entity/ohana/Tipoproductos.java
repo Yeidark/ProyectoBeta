@@ -19,15 +19,20 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "tipoproductos")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tipoproductos.findAll", query = "SELECT t FROM Tipoproductos t")})
+    @NamedQuery(name = "Tipoproductos.findAll", query = "SELECT t FROM Tipoproductos t"),
+    @NamedQuery(name = "Tipoproductos.findByIdTipoProducto", query = "SELECT t FROM Tipoproductos t WHERE t.idTipoProducto = :idTipoProducto"),
+    @NamedQuery(name = "Tipoproductos.findByNombreProducto", query = "SELECT t FROM Tipoproductos t WHERE t.nombreProducto = :nombreProducto")})
 public class Tipoproductos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,6 +70,7 @@ public class Tipoproductos implements Serializable {
         this.nombreProducto = nombreProducto;
     }
 
+    @XmlTransient
     public Collection<Productos> getProductosCollection() {
         return productosCollection;
     }
@@ -95,7 +101,7 @@ public class Tipoproductos implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Tipoproductos[ idTipoProducto=" + idTipoProducto + " ]";
+        return "edu.sena.ohana.Tipoproductos[ idTipoProducto=" + idTipoProducto + " ]";
     }
     
 }

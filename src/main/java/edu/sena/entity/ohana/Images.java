@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Acer
+ * @author josea
  */
 @Entity
 @Table(name = "images")
@@ -111,7 +111,7 @@ public class Images implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Images[ id=" + id + " ]";
+        return "edu.sena.ohana.Images[ id=" + id + " ]";
     }
     
 }

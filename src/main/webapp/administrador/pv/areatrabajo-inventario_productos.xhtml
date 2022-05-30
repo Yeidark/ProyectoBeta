@@ -3,59 +3,71 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <ui:composition> 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition>  
+
+
+
         <main>
-            <p:fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%" toggleable="true">
-
-                <h:form>
-                    <p:dataTable id="produc" var="prod" value="#{productoSession.leerTodo()}"  class="table" style=" overflow: scroll;height: 300px">
-
-                        <p:column headerText="Producto" filterBy="#{prod.idTipoProducto.nombreProducto}" filterMatchMode="contains">
-                            <h:outputText value="#{prod.idTipoProducto.nombreProducto}"/>
-                        </p:column>
-                        <p:column headerText="Talla" filterBy="#{prod.talla}" filterMatchMode="contains">
-                            <h:outputText value="#{prod.talla}"/>
-                        </p:column>
-                        <p:column headerText="Tamaño" filterBy="#{prod.tamanio}" filterMatchMode="contains">
-                            <h:outputText value="#{prod.tamanio}"/>
-                        </p:column>
-                        <p:column headerText="Color" filterBy="#{prod.color}" filterMatchMode="contains">
-                            <h:outputText value="#{prod.color}"/>
-                        </p:column>
-                        <p:column headerText="Editar" exportable="false">
-                            <p:commandLink action="#{productoSession.cargaProducto(prod)}" class="btn btn-outline-danger" value="Editar">
-
-                            </p:commandLink>
-                        </p:column>
-                        <p:column headerText="Eliminar" exportable="false">
-                            <p:commandLink action="#{productoSession.removerproducto(prod)}" class="btn btn-outline-danger"  value="Eliminar">
-
-                            </p:commandLink>
-                        </p:column>
-                    </p:dataTable>
+            <fieldset style="width: 80%; margin-left: 33%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%">
 
 
-                    <div class="btn-group" role="group" aria-label="Basic example" style="margin-left: 78%">
-                        <a href="#{request.contextPath}/administrador/inventario_agregarproductos.xhtml" >
-                            <button  type="button" class="btn btn-outline-danger">Agregar</button>
-                        </a>
-                    </div>   
-                    <div align="center">
-                        <h:commandLink style="margin-right: 2%">
-                            <h:graphicImage url="../assets/img/Excel.jpg" width="50px" height="70px"/>
-                            <p:dataExporter type="xls" target="produc" fileName="categoriaExcel"/>
-                        </h:commandLink>
-                        
-                        <h:commandLink>
-                            <h:graphicImage url="../assets/img/pdf.png" width="50px" height="70px"/>
-                            <p:dataExporter type="pdf" target="produc" fileName="categoriapdf"/>
-                        </h:commandLink>
-                   </div>
-                </h:form>  
+                <div class="table" style="overflow: scroll;height: 300px">
+                    <table border="1" id="produ">
+                        <tr>
+                            
+                            <th width="20%">Nombre Producto</th>  
 
-            </p:fieldset>
+                            <th width="20%">Nombre</th>
+
+                            <th width="20%">Foto</th>
+
+                            <th width="20%">Descripcion</th>
+                            
+                            <th width="20%">Precio</th>
+                            
+                            <th width="20%">Stock</th>
+
+                            <th width="20%">Modificar</th>
+
+                            <th width="20%">Eliminar</th>
+
+                        </tr>
+                        <h:form>
+                            <c:forEach var="prod" items="#{productoSession.leerTodo()}">
+
+                                <tr>
+                                    <td>#{prod.idTipoProducto.nombreProducto}</td>
+
+                                    <td>#{prod.nombres}</td>
+
+                                    <td>#{prod.foto}</td>
+
+                                    <td>#{prod.descripcion}</td>
+                                    
+                                    <td>#{prod.precio}</td>
+                                    
+                                    <td>#{prod.stock}</td>
+
+                                    <td><h:commandButton action="#{productoSession.cargaProducto(prod)}" class="btn btn-outline-danger" value="Editar"></h:commandButton></td>
+
+                                    <td><h:commandButton action="#{productoSession.removerproducto(prod)}" class="btn btn-outline-danger"  value="Eliminar"/></td>
+                                </tr>
+                            </c:forEach>
+
+                        </h:form>   
+
+                    </table>
+                </div>
+
+                <div class="btn-group" role="group" aria-label="Basic example" style="margin-left: 78%">
+                    <a href="#{request.contextPath}/administrador/inventario_agregarproductos.xhtml" >
+                        <button  type="button" class="btn btn-outline-danger">Agregar</button>
+                    </a>
+                    <button onclick="ExportToExcel('produ')" type="button" class="btn btn-outline-danger">Exportar</button>
+                </div>
+            </fieldset>
+
         </main>
 
 

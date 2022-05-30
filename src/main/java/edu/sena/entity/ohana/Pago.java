@@ -10,6 +10,7 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Acer
+ * @author josea
  */
 @Entity
 @Table(name = "pago")
@@ -42,7 +43,7 @@ public class Pago implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Monto")
     private Double monto;
-    @OneToMany(mappedBy = "idPago")
+    @OneToMany(mappedBy = "idPago", fetch = FetchType.LAZY)
     private Collection<Compras> comprasCollection;
 
     public Pago() {
@@ -99,7 +100,7 @@ public class Pago implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Pago[ idPago=" + idPago + " ]";
+        return "edu.sena.ohana.Pago[ idPago=" + idPago + " ]";
     }
     
 }

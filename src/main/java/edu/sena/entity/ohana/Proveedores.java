@@ -18,15 +18,24 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "proveedores")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Proveedores.findAll", query = "SELECT p FROM Proveedores p")})
+    @NamedQuery(name = "Proveedores.findAll", query = "SELECT p FROM Proveedores p"),
+    @NamedQuery(name = "Proveedores.findByNit", query = "SELECT p FROM Proveedores p WHERE p.nit = :nit"),
+    @NamedQuery(name = "Proveedores.findByNombreEmpresa", query = "SELECT p FROM Proveedores p WHERE p.nombreEmpresa = :nombreEmpresa"),
+    @NamedQuery(name = "Proveedores.findByProducto", query = "SELECT p FROM Proveedores p WHERE p.producto = :producto"),
+    @NamedQuery(name = "Proveedores.findByNumeroCedula", query = "SELECT p FROM Proveedores p WHERE p.numeroCedula = :numeroCedula"),
+    @NamedQuery(name = "Proveedores.findByNombreProveedor", query = "SELECT p FROM Proveedores p WHERE p.nombreProveedor = :nombreProveedor"),
+    @NamedQuery(name = "Proveedores.findByApellidoProveedor", query = "SELECT p FROM Proveedores p WHERE p.apellidoProveedor = :apellidoProveedor")})
 public class Proveedores implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -107,6 +116,7 @@ public class Proveedores implements Serializable {
         this.apellidoProveedor = apellidoProveedor;
     }
 
+    @XmlTransient
     public Collection<Inventario> getInventarioCollection() {
         return inventarioCollection;
     }
@@ -137,7 +147,7 @@ public class Proveedores implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Proveedores[ nit=" + nit + " ]";
+        return "edu.sena.ohana.Proveedores[ nit=" + nit + " ]";
     }
     
 }

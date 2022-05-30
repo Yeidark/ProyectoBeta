@@ -18,15 +18,20 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "roles")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")})
+    @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r"),
+    @NamedQuery(name = "Roles.findByIdRol", query = "SELECT r FROM Roles r WHERE r.idRol = :idRol"),
+    @NamedQuery(name = "Roles.findByNombreRol", query = "SELECT r FROM Roles r WHERE r.nombreRol = :nombreRol")})
 public class Roles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,6 +71,7 @@ public class Roles implements Serializable {
         this.nombreRol = nombreRol;
     }
 
+    @XmlTransient
     public Collection<Permisos> getPermisosCollection() {
         return permisosCollection;
     }
@@ -74,6 +80,7 @@ public class Roles implements Serializable {
         this.permisosCollection = permisosCollection;
     }
 
+    @XmlTransient
     public Collection<Personas> getPersonasCollection() {
         return personasCollection;
     }
@@ -104,7 +111,7 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Roles[ idRol=" + idRol + " ]";
+        return "edu.sena.ohana.Roles[ idRol=" + idRol + " ]";
     }
     
 }

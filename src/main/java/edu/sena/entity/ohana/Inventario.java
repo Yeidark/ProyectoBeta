@@ -21,15 +21,27 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "inventario")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Inventario.findAll", query = "SELECT i FROM Inventario i")})
+    @NamedQuery(name = "Inventario.findAll", query = "SELECT i FROM Inventario i"),
+    @NamedQuery(name = "Inventario.findByIdInventario", query = "SELECT i FROM Inventario i WHERE i.idInventario = :idInventario"),
+    @NamedQuery(name = "Inventario.findByIdProducto", query = "SELECT i FROM Inventario i WHERE i.idProducto = :idProducto"),
+    @NamedQuery(name = "Inventario.findByPrecioUnitario", query = "SELECT i FROM Inventario i WHERE i.precioUnitario = :precioUnitario"),
+    @NamedQuery(name = "Inventario.findByPrecioVenta", query = "SELECT i FROM Inventario i WHERE i.precioVenta = :precioVenta"),
+    @NamedQuery(name = "Inventario.findByCantidadEntrante", query = "SELECT i FROM Inventario i WHERE i.cantidadEntrante = :cantidadEntrante"),
+    @NamedQuery(name = "Inventario.findByCantidadStock", query = "SELECT i FROM Inventario i WHERE i.cantidadStock = :cantidadStock"),
+    @NamedQuery(name = "Inventario.findByFechaIngreso", query = "SELECT i FROM Inventario i WHERE i.fechaIngreso = :fechaIngreso"),
+    @NamedQuery(name = "Inventario.findByFechaSalida", query = "SELECT i FROM Inventario i WHERE i.fechaSalida = :fechaSalida"),
+    @NamedQuery(name = "Inventario.findByLote", query = "SELECT i FROM Inventario i WHERE i.lote = :lote"),
+    @NamedQuery(name = "Inventario.findByCantidadSaliente", query = "SELECT i FROM Inventario i WHERE i.cantidadSaliente = :cantidadSaliente")})
 public class Inventario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +50,8 @@ public class Inventario implements Serializable {
     @Basic(optional = false)
     @Column(name = "idInventario")
     private Integer idInventario;
+    @Column(name = "idProducto")
+    private Integer idProducto;
     @Column(name = "precioUnitario")
     private Integer precioUnitario;
     @Column(name = "precioVenta")
@@ -56,9 +70,9 @@ public class Inventario implements Serializable {
     private Integer lote;
     @Column(name = "cantidadSaliente")
     private Integer cantidadSaliente;
-    @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
+    @JoinColumn(name = "idProductos", referencedColumnName = "idProducto")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Productos idProducto;
+    private Productos idProductos;
     @JoinColumn(name = "nit", referencedColumnName = "nit")
     @ManyToOne(fetch = FetchType.LAZY)
     private Proveedores nit;
@@ -79,6 +93,14 @@ public class Inventario implements Serializable {
 
     public void setIdInventario(Integer idInventario) {
         this.idInventario = idInventario;
+    }
+
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
     }
 
     public Integer getPrecioUnitario() {
@@ -145,12 +167,12 @@ public class Inventario implements Serializable {
         this.cantidadSaliente = cantidadSaliente;
     }
 
-    public Productos getIdProducto() {
-        return idProducto;
+    public Productos getIdProductos() {
+        return idProductos;
     }
 
-    public void setIdProducto(Productos idProducto) {
-        this.idProducto = idProducto;
+    public void setIdProductos(Productos idProductos) {
+        this.idProductos = idProductos;
     }
 
     public Proveedores getNit() {
@@ -191,7 +213,7 @@ public class Inventario implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Inventario[ idInventario=" + idInventario + " ]";
+        return "edu.sena.ohana.Inventario[ idInventario=" + idInventario + " ]";
     }
     
 }

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Acer
+ * @author josea
  */
 @Entity
 @Table(name = "detalle_compras")
@@ -44,10 +45,10 @@ public class DetalleCompras implements Serializable {
     @Column(name = "PrecioCompra")
     private Double precioCompra;
     @JoinColumn(name = "idCompras", referencedColumnName = "idCompras")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Compras idCompras;
     @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Producto idProducto;
 
     public DetalleCompras() {
@@ -119,7 +120,7 @@ public class DetalleCompras implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.DetalleCompras[ idDetalle=" + idDetalle + " ]";
+        return "edu.sena.ohana.DetalleCompras[ idDetalle=" + idDetalle + " ]";
     }
     
 }

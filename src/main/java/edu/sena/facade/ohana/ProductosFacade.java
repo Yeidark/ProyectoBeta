@@ -6,6 +6,7 @@
 package edu.sena.facade.ohana;
 
 import edu.sena.entity.ohana.Productos;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,7 +15,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Stateless
 public class ProductosFacade extends AbstractFacade<Productos> implements ProductosFacadeLocal {
@@ -30,8 +31,8 @@ public class ProductosFacade extends AbstractFacade<Productos> implements Produc
     public ProductosFacade() {
         super(Productos.class);
     }
-
-    @Override
+    
+        @Override
     public List<Productos> leerTodo() {
 
         em.getEntityManagerFactory().getCache().evictAll();
@@ -42,11 +43,13 @@ public class ProductosFacade extends AbstractFacade<Productos> implements Produc
     @Override
     public boolean agregarProducto(Productos prodagr, int idProducto, int idTipoProducto) {
         try {
-            Query prod = em.createNativeQuery("INSERT INTO productos (idTipoProducto,talla,tamanio,color) VALUES (?,?,?,?);");
+            Query prod = em.createNativeQuery("INSERT INTO productos (idTipoProducto,Nombres,Foto,Descripcion,Precio,Stock) VALUES (?,?,?,?,?,?);");
             prod.setParameter(1, idTipoProducto);
-            prod.setParameter(2, prodagr.getTalla());
-            prod.setParameter(3, prodagr.getTamanio());
-            prod.setParameter(4, prodagr.getColor());
+            prod.setParameter(2, prodagr.getNombres());
+            prod.setParameter(3, prodagr.getFoto());
+            prod.setParameter(4, prodagr.getDescripcion());
+            prod.setParameter(5, prodagr.getPrecio());
+            prod.setParameter(6, prodagr.getStock());
             prod.executeUpdate();
             return true;
 
@@ -55,6 +58,5 @@ public class ProductosFacade extends AbstractFacade<Productos> implements Produc
         }
 
     }
-
-
+    
 }

@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Acer
+ * @author josea
  */
 @Entity
 @Table(name = "compras")
@@ -58,9 +59,9 @@ public class Compras implements Serializable {
     @Column(name = "Estado")
     private String estado;
     @JoinColumn(name = "idPago", referencedColumnName = "idPago")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pago idPago;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCompras")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCompras", fetch = FetchType.LAZY)
     private Collection<DetalleCompras> detalleComprasCollection;
 
     public Compras() {
@@ -149,7 +150,7 @@ public class Compras implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Compras[ idCompras=" + idCompras + " ]";
+        return "edu.sena.ohana.Compras[ idCompras=" + idCompras + " ]";
     }
     
 }

@@ -11,9 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,13 +26,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Acer
+ * @author josea
  */
 @Entity
 @Table(name = "producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Producto.findAll", query = "SELECT pro FROM Producto pro")})
+    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
+    @NamedQuery(name = "Producto.findByIdProducto", query = "SELECT p FROM Producto p WHERE p.idProducto = :idProducto"),
+    @NamedQuery(name = "Producto.findByNombres", query = "SELECT p FROM Producto p WHERE p.nombres = :nombres"),
+    @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion"),
+    @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio"),
+    @NamedQuery(name = "Producto.findByStock", query = "SELECT p FROM Producto p WHERE p.stock = :stock")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,9 +49,9 @@ public class Producto implements Serializable {
     @Size(max = 255)
     @Column(name = "Nombres")
     private String nombres;
-    @Size(max = 255)
+    @Lob
     @Column(name = "Foto")
-    private String foto;
+    private byte[] foto;
     @Size(max = 255)
     @Column(name = "Descripcion")
     private String descripcion;
@@ -53,7 +60,7 @@ public class Producto implements Serializable {
     private Double precio;
     @Column(name = "Stock")
     private Integer stock;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto", fetch = FetchType.LAZY)
     private Collection<DetalleCompras> detalleComprasCollection;
 
     public Producto() {
@@ -79,11 +86,11 @@ public class Producto implements Serializable {
         this.nombres = nombres;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 
@@ -142,7 +149,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Producto[ idProducto=" + idProducto + " ]";
+        return "edu.sena.ohana.Producto[ idProducto=" + idProducto + " ]";
     }
     
 }

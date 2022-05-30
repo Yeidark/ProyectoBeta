@@ -26,15 +26,33 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "personas")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Personas.findAll", query = "SELECT p FROM Personas p")})
+    @NamedQuery(name = "Personas.findAll", query = "SELECT p FROM Personas p"),
+    @NamedQuery(name = "Personas.findByNumeroCedula", query = "SELECT p FROM Personas p WHERE p.numeroCedula = :numeroCedula"),
+    @NamedQuery(name = "Personas.findByPrimerNombre", query = "SELECT p FROM Personas p WHERE p.primerNombre = :primerNombre"),
+    @NamedQuery(name = "Personas.findBySegundoNombre", query = "SELECT p FROM Personas p WHERE p.segundoNombre = :segundoNombre"),
+    @NamedQuery(name = "Personas.findByPrimerApellido", query = "SELECT p FROM Personas p WHERE p.primerApellido = :primerApellido"),
+    @NamedQuery(name = "Personas.findBySegundoApellido", query = "SELECT p FROM Personas p WHERE p.segundoApellido = :segundoApellido"),
+    @NamedQuery(name = "Personas.findByCorreo", query = "SELECT p FROM Personas p WHERE p.correo = :correo"),
+    @NamedQuery(name = "Personas.findByNumeroCelular", query = "SELECT p FROM Personas p WHERE p.numeroCelular = :numeroCelular"),
+    @NamedQuery(name = "Personas.findByTipoDeVia", query = "SELECT p FROM Personas p WHERE p.tipoDeVia = :tipoDeVia"),
+    @NamedQuery(name = "Personas.findByNumeroVia", query = "SELECT p FROM Personas p WHERE p.numeroVia = :numeroVia"),
+    @NamedQuery(name = "Personas.findByLetraVia", query = "SELECT p FROM Personas p WHERE p.letraVia = :letraVia"),
+    @NamedQuery(name = "Personas.findByNumero", query = "SELECT p FROM Personas p WHERE p.numero = :numero"),
+    @NamedQuery(name = "Personas.findByLetra", query = "SELECT p FROM Personas p WHERE p.letra = :letra"),
+    @NamedQuery(name = "Personas.findByNumeroApto", query = "SELECT p FROM Personas p WHERE p.numeroApto = :numeroApto"),
+    @NamedQuery(name = "Personas.findByFechaDeNacimiento", query = "SELECT p FROM Personas p WHERE p.fechaDeNacimiento = :fechaDeNacimiento"),
+    @NamedQuery(name = "Personas.findByContrasenia", query = "SELECT p FROM Personas p WHERE p.contrasenia = :contrasenia")})
 public class Personas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,21 +63,21 @@ public class Personas implements Serializable {
     private Integer numeroCedula;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 15)
     @Column(name = "primerNombre")
     private String primerNombre;
-    @Size(max = 10)
+    @Size(max = 15)
     @Column(name = "segundoNombre")
     private String segundoNombre;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 12)
+    @Size(min = 1, max = 20)
     @Column(name = "primerApellido")
     private String primerApellido;
-    @Size(max = 12)
+    @Size(max = 20)
     @Column(name = "segundoApellido")
     private String segundoApellido;
-    @Size(max = 40)
+    @Size(max = 50)
     @Column(name = "correo")
     private String correo;
     @Column(name = "numeroCelular")
@@ -237,6 +255,7 @@ public class Personas implements Serializable {
         this.contrasenia = contrasenia;
     }
 
+    @XmlTransient
     public Collection<Roles> getRolesCollection() {
         return rolesCollection;
     }
@@ -245,6 +264,7 @@ public class Personas implements Serializable {
         this.rolesCollection = rolesCollection;
     }
 
+    @XmlTransient
     public Collection<Encargadosdelinventario> getEncargadosdelinventarioCollection() {
         return encargadosdelinventarioCollection;
     }
@@ -261,6 +281,7 @@ public class Personas implements Serializable {
         this.numeroLocalidad = numeroLocalidad;
     }
 
+    @XmlTransient
     public Collection<Clientes> getClientesCollection() {
         return clientesCollection;
     }
@@ -291,7 +312,7 @@ public class Personas implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Personas[ numeroCedula=" + numeroCedula + " ]";
+        return "edu.sena.ohana.Personas[ numeroCedula=" + numeroCedula + " ]";
     }
     
 }

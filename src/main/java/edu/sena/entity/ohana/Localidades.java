@@ -18,15 +18,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 57301
+ * @author josea
  */
 @Entity
 @Table(name = "localidades")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Localidades.findAll", query = "SELECT l FROM Localidades l")})
+    @NamedQuery(name = "Localidades.findAll", query = "SELECT l FROM Localidades l"),
+    @NamedQuery(name = "Localidades.findByNumeroLocalidad", query = "SELECT l FROM Localidades l WHERE l.numeroLocalidad = :numeroLocalidad"),
+    @NamedQuery(name = "Localidades.findByNombreLocalidad", query = "SELECT l FROM Localidades l WHERE l.nombreLocalidad = :nombreLocalidad")})
 public class Localidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,6 +71,7 @@ public class Localidades implements Serializable {
         this.nombreLocalidad = nombreLocalidad;
     }
 
+    @XmlTransient
     public Collection<Barrios> getBarriosCollection() {
         return barriosCollection;
     }
@@ -74,6 +80,7 @@ public class Localidades implements Serializable {
         this.barriosCollection = barriosCollection;
     }
 
+    @XmlTransient
     public Collection<Personas> getPersonasCollection() {
         return personasCollection;
     }
@@ -104,7 +111,7 @@ public class Localidades implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.sena.entity.ohana.Localidades[ numeroLocalidad=" + numeroLocalidad + " ]";
+        return "edu.sena.ohana.Localidades[ numeroLocalidad=" + numeroLocalidad + " ]";
     }
     
 }
